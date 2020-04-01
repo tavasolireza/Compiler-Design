@@ -3,7 +3,7 @@ from ply import lex
 
 class Lexer:
     tokens = [
-        'ID', 'INTEGERNUMBER', 'FLOATNUMBER',  # 'ERROR!',
+        'ID', 'INTEGERNUMBER', 'FLOATNUMBER', 'ERROR',
         'INTEGER', 'FLOAT', 'BOOLEAN', 'VOID', 'TRUE', 'FALSE', 'PRINT', 'RETURN', 'MAIN', 'IF', 'ELSE', 'ELIF',
         'WHILE', 'FOR', 'AND', 'OR', 'NOT', 'ASSIGN', 'SUM', 'SUB', 'MUL', 'DIV', 'MOD', 'GT', 'GE', 'LT', 'LE', 'EQ',
         'NE', 'LCB', 'RCB', 'LRB', 'RRB', 'LSB', 'RSB', 'SEMICOLON', 'COMMA',
@@ -83,25 +83,33 @@ class Lexer:
     # t_WHILE = r'while'
     # t_PRINT = r'print'
 
+    def t_ERROR(self, t):
+        r""" ([0-9]{10,}\.[0-9]{10,}) | ([0-9]{1,9}\.[0-9]{10,}) | ([0-9]{10,}\.[0-9]{1,9}) | ([0-9]{10,})
+        | ([0-9]+\.[0-9]+\.+[0-9]*)
+        | ([0-9]+[a-zA-Z_][a-zA-Z_0-9]*)
+        | [\+\-\*\/\%\s]+\s+[\+\-\*\/\%]+|[\+\-\*\/\%]{2,}
+
+        """
+        return t
+
     def t_ID(self, t):
-        r'[a-zA-Z_][a-zA-Z_0-9]*'
+        r"""[a-zA-Z_][a-zA-Z_0-9]*"""
         t.type = self.reserved.get(t.value, 'ID')  # Check for reserved words
-        print('this is length ', t.value.__len__(), t.value[1])
         return t
 
     def t_FLOATNUMBER(self, t):
-        r'[0-9]{1,10}\.[0-9]+'
+        r"""[0-9]{1,9}\.[0-9]{1,9}"""
         t.value = float(t.value)
         return t
 
     def t_INTEGERNUMBER(self, t):
-        r'[0-9]{1,10}'
+        r"""[0-9]{1,9}"""
         # r'((?!^0\d+)^0)|((?!0+)\d{1,10})'
         t.value = int(t.value)
         return t
 
     def t_newline(self, t):
-        r'\n+'
+        r"""\n+"""
         t.lexer.lineno += len(t.value)
 
     t_ignore = '\n \t'
