@@ -9,20 +9,37 @@ class Lexer:
         'NE', 'LCB', 'RCB', 'LRB', 'RRB', 'LSB', 'RSB', 'SEMICOLON', 'COMMA',
     ]
 
-    t_INTEGER = r'int'
-    t_FLOAT = r'float'
-    t_BOOLEAN = r'bool'
-    t_VOID = r'void'
-    t_TRUE = r'true'
-    t_FALSE = r'false'
-    t_PRINT = r'print'
-    t_RETURN = r'return'
-    t_MAIN = r'main'
-    t_IF = r'if'
-    t_ELSE = r'else'
-    t_ELIF = r'elif'
-    t_WHILE = r'while'
-    t_FOR = r'for'
+    reserved = {
+        'int': "INTEGER",
+        'float': "FLOAT",
+        'bool': "BOOLEAN",
+        'void': "VOID",
+        'true': "TRUE",
+        'false': "FALSE",
+        'print': "PRINT",
+        'return': "RETURN",
+        'main': "MAIN",
+        'if': "IF",
+        'else': "ELSE",
+        'elif': "ELIF",
+        'while': "WHILE",
+        'for': "FOR",
+    }
+
+    # t_INTEGER = r'int'
+    # t_FLOAT = r'float'
+    # t_BOOLEAN = r'bool'
+    # t_VOID = r'void'
+    # t_TRUE = r'true'
+    # t_FALSE = r'false'
+    # t_PRINT = r'print'
+    # t_RETURN = r'return'
+    # t_MAIN = r'main'
+    # t_IF = r'if'
+    # t_ELSE = r'else'
+    # t_ELIF = r'elif'
+    # t_WHILE = r'while'
+    # t_FOR = r'for'
     t_AND = r'\&\&'
     t_OR = r'\|\|'
     t_NOT = r'\!'
@@ -66,8 +83,21 @@ class Lexer:
     # t_WHILE = r'while'
     # t_PRINT = r'print'
 
+    def t_ID(self, t):
+        r'[a-zA-Z_][a-zA-Z_0-9]*'
+        t.type = self.reserved.get(t.value, 'ID')  # Check for reserved words
+        print('this is length ', t.value.__len__(), t.value[1])
+        return t
+
+    def t_FLOATNUMBER(self, t):
+        r'[0-9]{1,10}\.[0-9]+'
+        t.value = float(t.value)
+        return t
+
     def t_INTEGERNUMBER(self, t):
-        r'[-|+]?(\d+)'
+        r'[0-9]{1,10}'
+        # r'((?!^0\d+)^0)|((?!0+)\d{1,10})'
+        t.value = int(t.value)
         return t
 
     def t_newline(self, t):
