@@ -12,6 +12,10 @@ class Parser:
         """program : declist MAIN LRB RRB block"""
         print("program : declist MAIN LRB RRB block")
 
+    def p_program_2(self, p):
+        """program : MAIN LRB RRB block"""
+        print("program : declist MAIN LRB RRB block")
+
     def p_declist_dec(self, p):
         """declist : dec"""
         print("declist : dec")
@@ -20,9 +24,9 @@ class Parser:
         """declist : declist dec"""
         print("declist : declist dec")
 
-    def p_declist_lambda(self, p):
-        """declist : """
-        print("declist : ")
+    # def p_declist_lambda(self, p):
+    #     """declist : """
+    #     print("declist : ")
 
     def p_dec_vardec(self, p):
         """dec : vardec"""
@@ -72,17 +76,25 @@ class Parser:
         """funcdec : type ID LRB paramdecs RRB block"""
         print("funcdec : type ID LRB paramdecs RRB block")
 
+    def p_funcdec_type_2(self, p):
+        """funcdec : type ID LRB RRB block"""
+        print("funcdec : type ID LRB RRB block")
+
     def p_funcdec_void(self, p):
         """funcdec : VOID ID LRB paramdecs RRB block"""
-        print("funcdec : VOID ID LRB paramdecs RRB block")
+        print("funcdec : VOID ID LRB RRB block")
+
+    def p_funcdec_void_2(self, p):
+        """funcdec : VOID ID LRB RRB block"""
+        print("funcdec : VOID ID LRB RRB block")
 
     def p_paramdecs_list(self, p):
         """paramdecs : paramdecslist"""
         print("paramdecs : paramdecslist")
 
-    def p_paramdecs_lambda(self, p):
-        """paramdecs : """
-        print("paramdecs : ")
+    # def p_paramdecs_lambda(self, p):
+    #     """paramdecs : """
+    #     print("paramdecs : ")
 
     def p_paramdecslist_paramdec(self, p):
         """paramdecslist : paramdec"""
@@ -108,13 +120,25 @@ class Parser:
         """varlist : varlist vardec"""
         print("varlist : varlist vardec")
 
-    def p_varlist_lambda(self, p):
-        """varlist : """
-        print("varlist : ")
+    # def p_varlist_lambda(self, p):
+    #     """varlist : """
+    #     print("varlist : ")
 
     def p_block(self, p):
         """block : LCB varlist stmtlist RCB"""
         print("block : LCB varlist stmtlist RCB")
+
+    def p_block_12(self, p):
+        """block : LCB varlist RCB"""
+        print("block : LCB varlist RCB")
+
+    def p_block_2(self, p):
+        """block : LCB stmtlist RCB"""
+        print("block : LCB stmtlist RCB")
+
+    def p_block_22(self, p):
+        """block : LCB RCB"""
+        print("block : LCB RCB")
 
     def p_stmtlist_stmt(self, p):
         """stmtlist : stmt"""
@@ -124,9 +148,9 @@ class Parser:
         """stmtlist : stmtlist stmt"""
         print("stmtlist : stmtlist stmt")
 
-    def p_stmtlist_lambda(self, p):
-        """stmtlist : """
-        print("stmtlist : ")
+    # def p_stmtlist_lambda(self, p):
+    #     """stmtlist : """
+    #     print("stmtlist : ")
 
     def p_lvalue_id(self, p):
         """lvalue : ID"""
@@ -156,6 +180,40 @@ class Parser:
         """stmt : FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt"""
         print("stmt : FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt")
 
+    # def p_stmt_if_addy(self, p):
+    #     """stmt : IF LRB exp RRB stmt addy"""
+    #
+    # def p_stmt_if_addy_2(self, p):
+    #     """stmt : IF LRB exp RRB stmt"""
+
+    # def p_addy_1(self, p):
+    #     """addy : """
+
+    # def p_addy_2(self, p):
+    #     """addy : elseiflist"""
+    #
+    # def p_addy_3(self, p):
+    #     """addy : elseiflist ELSE stmt"""
+    #
+    # def p_addy_4(self, p):
+    #     """addy : ELSE stmt"""
+
+    # def p_stmt_if(self, p):
+    #     """stmt : IF LRB exp RRB stmt elseiflist"""
+    #     print("stmt : IF LRB exp RRB stmt elseiflist")
+
+    # def p_stmt_if_2(self, p):
+    #     """stmt : IF LRB exp RRB stmt"""
+    #     print("stmt : IF LRB exp RRB stmt")
+
+    # def p_stmt_if_long(self, p):
+    #     """stmt : IF LRB exp RRB stmt elseiflist ELSE stmt"""
+    #     print("stmt : IF LRB exp RRB stmt elseiflist ELSE stmt")
+
+    # def p_stmt_if_long_2(self, p):
+    #     """stmt : IF LRB exp RRB stmt ELSE stmt"""
+    #     print("stmt : IF LRB exp RRB stmt ELSE stmt")
+
     def p_stmt_if(self, p):
         """stmt : IF LRB exp RRB stmt elseiflist"""
         print("stmt : IF LRB exp RRB stmt elseiflist")
@@ -167,6 +225,18 @@ class Parser:
     def p_stmt_print(self, p):
         """stmt : PRINT LRB ID RRB SEMICOLON"""
         print("stmt : PRINT LRB ID RRB SEMICOLON")
+
+    # def p_elseiflist_elif(self, p):
+    #     """elseiflist : ELIF LRB exp RRB stmt"""
+    #     print("elseiflist : ELIF LRB exp RRB stmt")
+    #
+    # def p_elseiflist_elseiflist(self, p):
+    #     """elseiflist : elseiflist ELIF LRB exp RRB stmt"""
+    #     print("elseiflist : elseiflist ELIF LRB exp RRB stmt")
+
+    # def p_elseiflist_lambda(self, p):
+    #     """elseiflist : """
+    #     print("elseiflist : ")
 
     def p_elseiflist_elif(self, p):
         """elseiflist : ELIF LRB exp RRB stmt"""
@@ -187,6 +257,8 @@ class Parser:
     def p_exp_operator(self, p):
         """exp : exp operator exp"""
         print("exp : exp operator exp")
+
+
 
     def p_exp_relop(self, p):
         """exp : exp relop exp"""
@@ -297,6 +369,9 @@ class Parser:
         print("explist : explist COMMA exp")
 
     precedence = (
+        ('right', 'ASSIGN'),
+        ('left', 'NOT'),
+        ('left', 'ELIF'),
         ('left', 'ELSE'),
         ('left', 'OR'),
         ('left', 'AND'),
