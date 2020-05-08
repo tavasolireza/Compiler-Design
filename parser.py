@@ -9,12 +9,16 @@ class Parser:
         pass
 
     def p_program(self, p):
-        """program : declist MAIN LRB RRB block"""
-        print("program : declist MAIN LRB RRB block")
+        """program : begin"""
+        print("program : begin")
 
-    def p_program_2(self, p):
-        """program : MAIN LRB RRB block"""
-        print("program : MAIN LRB RRB block")
+    def p_start_1(self, p):
+        """begin : declist MAIN LRB RRB block"""
+        print("begin : declist MAIN LRB RRB block")
+
+    def p_start_2(self, p):
+        """begin : MAIN LRB RRB block"""
+        print("begin : MAIN LRB RRB block")
 
     def p_declist_dec(self, p):
         """declist : dec"""
