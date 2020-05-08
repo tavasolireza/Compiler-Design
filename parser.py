@@ -14,7 +14,7 @@ class Parser:
 
     def p_program_2(self, p):
         """program : MAIN LRB RRB block"""
-        print("program : declist MAIN LRB RRB block")
+        print("program : MAIN LRB RRB block")
 
     def p_declist_dec(self, p):
         """declist : dec"""
@@ -78,7 +78,7 @@ class Parser:
 
     def p_funcdec_void(self, p):
         """funcdec : VOID ID LRB paramdecs RRB block"""
-        print("funcdec : VOID ID LRB RRB block")
+        print("funcdec : VOID ID LRB paramdecs RRB block")
 
     def p_funcdec_void_2(self, p):
         """funcdec : VOID ID LRB RRB block"""
@@ -116,15 +116,15 @@ class Parser:
         """block : LCB varlist stmtlist RCB"""
         print("block : LCB varlist stmtlist RCB")
 
-    def p_block_12(self, p):
+    def p_block_varlist(self, p):
         """block : LCB varlist RCB"""
         print("block : LCB varlist RCB")
 
-    def p_block_2(self, p):
+    def p_block_stmtlist(self, p):
         """block : LCB stmtlist RCB"""
         print("block : LCB stmtlist RCB")
 
-    def p_block_22(self, p):
+    def p_block_empty(self, p):
         """block : LCB RCB"""
         print("block : LCB RCB")
 
@@ -136,14 +136,13 @@ class Parser:
         """stmtlist : stmtlist stmt"""
         print("stmtlist : stmtlist stmt")
 
-
     def p_lvalue_id(self, p):
         """lvalue : ID"""
-        print("lvalue : ID COMMA ID LSB exp RSB")
+        print("lvalue : ID")
 
     def p_lvalue_exp(self, p):
         """lvalue : ID LSB exp RSB"""
-        print("lvalue : ID COMMA ID LSB exp RSB")
+        print("lvalue : ID LSB exp RSB")
 
     def p_stmt_return(self, p):
         """stmt : RETURN exp SEMICOLON"""
@@ -171,7 +170,7 @@ class Parser:
 
     def p_stmt_if_elseif(self, p):
         """stmt : IF LRB exp RRB stmt %prec p1"""
-        print("stmt : IF LRB exp RRB stmt elseiflist")
+        print("stmt : IF LRB exp RRB stmt")
 
     def p_stmt_if_long(self, p):
         """stmt : IF LRB exp RRB stmt elseiflist ELSE stmt"""
@@ -179,7 +178,7 @@ class Parser:
 
     def p_stmt_if_long_long(self, p):
         """stmt : IF LRB exp RRB stmt ELSE stmt"""
-        print("stmt : IF LRB exp RRB stmt elseiflist ELSE stmt")
+        print("stmt : IF LRB exp RRB stmt ELSE stmt")
 
     def p_stmt_print(self, p):
         """stmt : PRINT LRB ID RRB SEMICOLON"""
@@ -199,24 +198,31 @@ class Parser:
 
     def p_exp_sum(self, p):
         """exp : exp SUM exp"""
+        print("exp : exp SUM exp")
 
     def p_exp_sub(self, p):
         """exp : exp SUB exp"""
+        print("exp : exp SUB exp")
 
     def p_exp_mul(self, p):
         """exp : exp MUL exp"""
+        print("exp : exp MUL exp")
 
     def p_exp_div(self, p):
         """exp : exp DIV exp"""
+        print("exp : exp DIV exp")
 
     def p_exp_mod(self, p):
         """exp : exp MOD exp"""
+        print("exp : exp MOD exp")
 
     def p_exp_or(self, p):
         """exp : exp OR exp"""
+        print("exp : exp OR exp")
 
     def p_exp_and(self, p):
         """exp : exp AND exp"""
+        print("exp : exp AND exp")
 
     def p_exp_const(self, p):
         """exp : const"""
@@ -264,22 +270,27 @@ class Parser:
 
     def p_relop_gt(self, p):
         """exp : exp GT exp"""
+        print("exp : exp GT exp")
 
     def p_relop_lt(self, p):
         """exp : exp LT exp"""
+        print("exp : exp LT exp")
 
     def p_relop_ne(self, p):
         """exp : exp NE exp"""
+        print("exp : exp NE exp")
 
     def p_relop_eq(self, p):
         """exp : exp EQ exp"""
+        print("exp : exp EQ exp")
 
     def p_relop_le(self, p):
         """exp : exp LE exp"""
+        print("exp : exp LE exp")
 
     def p_relop_ge(self, p):
         """exp : exp GE exp"""
-        print("relop : GE")
+        print("exp : exp GE exp")
 
     def p_explist_exp(self, p):
         """explist : exp"""
@@ -290,7 +301,6 @@ class Parser:
         print("explist : explist COMMA exp")
 
     precedence = (
-        # ('nonassoc', 'EMPTY'),
         ('left', 'COMMA'),
         ('right', 'ASSIGN'),
         ('right', 'NOT'),
