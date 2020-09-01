@@ -1,0 +1,4955 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ERROR
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> begin
+Rule 2     begin -> declist MAIN LRB RRB block
+Rule 3     begin -> MAIN LRB RRB block
+Rule 4     declist -> dec
+Rule 5     declist -> declist dec
+Rule 6     dec -> vardec
+Rule 7     dec -> funcdec
+Rule 8     type -> INTEGER
+Rule 9     type -> FLOAT
+Rule 10    type -> BOOLEAN
+Rule 11    iddec -> ID
+Rule 12    iddec -> ID LSB exp RSB
+Rule 13    iddec -> ID ASSIGN exp
+Rule 14    idlist -> iddec
+Rule 15    idlist -> idlist COMMA iddec
+Rule 16    vardec -> type idlist SEMICOLON
+Rule 17    funcdec -> type ID LRB paramdecs RRB block
+Rule 18    funcdec -> type ID LRB RRB block
+Rule 19    funcdec -> VOID ID LRB paramdecs RRB block
+Rule 20    funcdec -> VOID ID LRB RRB block
+Rule 21    paramdecs -> paramdecslist
+Rule 22    paramdecslist -> paramdec
+Rule 23    paramdecslist -> paramdecslist COMMA paramdec
+Rule 24    paramdec -> type ID
+Rule 25    paramdec -> type ID LSB RSB
+Rule 26    varlist -> vardec
+Rule 27    varlist -> varlist vardec
+Rule 28    block -> LCB varlist stmtlist RCB
+Rule 29    block -> LCB varlist RCB
+Rule 30    block -> LCB stmtlist RCB
+Rule 31    block -> LCB RCB
+Rule 32    stmtlist -> stmt
+Rule 33    stmtlist -> stmtlist stmt
+Rule 34    lvalue -> ID
+Rule 35    lvalue -> ID LSB exp RSB
+Rule 36    stmt -> RETURN exp SEMICOLON
+Rule 37    stmt -> exp SEMICOLON
+Rule 38    stmt -> block
+Rule 39    stmt -> WHILE LRB exp RRB stmt
+Rule 40    stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+Rule 41    stmt -> IF LRB exp RRB stmt elseiflist
+Rule 42    stmt -> IF LRB exp RRB stmt
+Rule 43    stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt
+Rule 44    stmt -> IF LRB exp RRB stmt ELSE stmt
+Rule 45    stmt -> PRINT LRB ID RRB SEMICOLON
+Rule 46    elseiflist -> ELIF LRB exp RRB stmt
+Rule 47    elseiflist -> elseiflist ELIF LRB exp RRB stmt
+Rule 48    exp -> lvalue ASSIGN exp
+Rule 49    exp -> exp SUM exp
+Rule 50    exp -> exp SUB exp
+Rule 51    exp -> exp MUL exp
+Rule 52    exp -> exp DIV exp
+Rule 53    exp -> exp MOD exp
+Rule 54    exp -> exp OR exp
+Rule 55    exp -> exp AND exp
+Rule 56    exp -> const
+Rule 57    exp -> lvalue
+Rule 58    exp -> ID LRB explist RRB
+Rule 59    exp -> LRB exp RRB
+Rule 60    exp -> ID LRB RRB
+Rule 61    exp -> SUB exp
+Rule 62    exp -> NOT exp
+Rule 63    const -> INTEGERNUMBER
+Rule 64    const -> FLOATNUMBER
+Rule 65    const -> TRUE
+Rule 66    const -> FALSE
+Rule 67    exp -> exp GT exp
+Rule 68    exp -> exp LT exp
+Rule 69    exp -> exp NE exp
+Rule 70    exp -> exp EQ exp
+Rule 71    exp -> exp LE exp
+Rule 72    exp -> exp GE exp
+Rule 73    explist -> exp
+Rule 74    explist -> explist COMMA exp
+
+Terminals, with rules where they appear
+
+AND                  : 55
+ASSIGN               : 13 48
+BOOLEAN              : 10
+COMMA                : 15 23 74
+DIV                  : 52
+ELIF                 : 46 47
+ELSE                 : 43 44
+EQ                   : 70
+ERROR                : 
+FALSE                : 66
+FLOAT                : 9
+FLOATNUMBER          : 64
+FOR                  : 40
+GE                   : 72
+GT                   : 67
+ID                   : 11 12 13 17 18 19 20 24 25 34 35 45 58 60
+IF                   : 41 42 43 44
+INTEGER              : 8
+INTEGERNUMBER        : 63
+LCB                  : 28 29 30 31
+LE                   : 71
+LRB                  : 2 3 17 18 19 20 39 40 41 42 43 44 45 46 47 58 59 60
+LSB                  : 12 25 35
+LT                   : 68
+MAIN                 : 2 3
+MOD                  : 53
+MUL                  : 51
+NE                   : 69
+NOT                  : 62
+OR                   : 54
+PRINT                : 45
+RCB                  : 28 29 30 31
+RETURN               : 36
+RRB                  : 2 3 17 18 19 20 39 40 41 42 43 44 45 46 47 58 59 60
+RSB                  : 12 25 35
+SEMICOLON            : 16 36 37 40 40 45
+SUB                  : 50 61
+SUM                  : 49
+TRUE                 : 65
+VOID                 : 19 20
+WHILE                : 39
+error                : 
+
+Nonterminals, with rules where they appear
+
+begin                : 1
+block                : 2 3 17 18 19 20 38
+const                : 56
+dec                  : 4 5
+declist              : 2 5
+elseiflist           : 41 43 47
+exp                  : 12 13 35 36 37 39 40 40 40 41 42 43 44 46 47 48 49 49 50 50 51 51 52 52 53 53 54 54 55 55 59 61 62 67 67 68 68 69 69 70 70 71 71 72 72 73 74
+explist              : 58 74
+funcdec              : 7
+iddec                : 14 15
+idlist               : 15 16
+lvalue               : 48 57
+paramdec             : 22 23
+paramdecs            : 17 19
+paramdecslist        : 21 23
+program              : 0
+stmt                 : 32 33 39 40 41 42 43 43 44 44 46 47
+stmtlist             : 28 30 33
+type                 : 16 17 18 24 25
+vardec               : 6 26 27
+varlist              : 27 28 29
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . begin
+    (2) begin -> . declist MAIN LRB RRB block
+    (3) begin -> . MAIN LRB RRB block
+    (4) declist -> . dec
+    (5) declist -> . declist dec
+    (6) dec -> . vardec
+    (7) dec -> . funcdec
+    (16) vardec -> . type idlist SEMICOLON
+    (17) funcdec -> . type ID LRB paramdecs RRB block
+    (18) funcdec -> . type ID LRB RRB block
+    (19) funcdec -> . VOID ID LRB paramdecs RRB block
+    (20) funcdec -> . VOID ID LRB RRB block
+    (8) type -> . INTEGER
+    (9) type -> . FLOAT
+    (10) type -> . BOOLEAN
+
+    MAIN            shift and go to state 4
+    VOID            shift and go to state 9
+    INTEGER         shift and go to state 10
+    FLOAT           shift and go to state 11
+    BOOLEAN         shift and go to state 12
+
+    program                        shift and go to state 1
+    begin                          shift and go to state 2
+    declist                        shift and go to state 3
+    dec                            shift and go to state 5
+    vardec                         shift and go to state 6
+    funcdec                        shift and go to state 7
+    type                           shift and go to state 8
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> begin .
+
+    $end            reduce using rule 1 (program -> begin .)
+
+
+state 3
+
+    (2) begin -> declist . MAIN LRB RRB block
+    (5) declist -> declist . dec
+    (6) dec -> . vardec
+    (7) dec -> . funcdec
+    (16) vardec -> . type idlist SEMICOLON
+    (17) funcdec -> . type ID LRB paramdecs RRB block
+    (18) funcdec -> . type ID LRB RRB block
+    (19) funcdec -> . VOID ID LRB paramdecs RRB block
+    (20) funcdec -> . VOID ID LRB RRB block
+    (8) type -> . INTEGER
+    (9) type -> . FLOAT
+    (10) type -> . BOOLEAN
+
+    MAIN            shift and go to state 13
+    VOID            shift and go to state 9
+    INTEGER         shift and go to state 10
+    FLOAT           shift and go to state 11
+    BOOLEAN         shift and go to state 12
+
+    dec                            shift and go to state 14
+    vardec                         shift and go to state 6
+    funcdec                        shift and go to state 7
+    type                           shift and go to state 8
+
+state 4
+
+    (3) begin -> MAIN . LRB RRB block
+
+    LRB             shift and go to state 15
+
+
+state 5
+
+    (4) declist -> dec .
+
+    MAIN            reduce using rule 4 (declist -> dec .)
+    VOID            reduce using rule 4 (declist -> dec .)
+    INTEGER         reduce using rule 4 (declist -> dec .)
+    FLOAT           reduce using rule 4 (declist -> dec .)
+    BOOLEAN         reduce using rule 4 (declist -> dec .)
+
+
+state 6
+
+    (6) dec -> vardec .
+
+    MAIN            reduce using rule 6 (dec -> vardec .)
+    VOID            reduce using rule 6 (dec -> vardec .)
+    INTEGER         reduce using rule 6 (dec -> vardec .)
+    FLOAT           reduce using rule 6 (dec -> vardec .)
+    BOOLEAN         reduce using rule 6 (dec -> vardec .)
+
+
+state 7
+
+    (7) dec -> funcdec .
+
+    MAIN            reduce using rule 7 (dec -> funcdec .)
+    VOID            reduce using rule 7 (dec -> funcdec .)
+    INTEGER         reduce using rule 7 (dec -> funcdec .)
+    FLOAT           reduce using rule 7 (dec -> funcdec .)
+    BOOLEAN         reduce using rule 7 (dec -> funcdec .)
+
+
+state 8
+
+    (16) vardec -> type . idlist SEMICOLON
+    (17) funcdec -> type . ID LRB paramdecs RRB block
+    (18) funcdec -> type . ID LRB RRB block
+    (14) idlist -> . iddec
+    (15) idlist -> . idlist COMMA iddec
+    (11) iddec -> . ID
+    (12) iddec -> . ID LSB exp RSB
+    (13) iddec -> . ID ASSIGN exp
+
+    ID              shift and go to state 17
+
+    idlist                         shift and go to state 16
+    iddec                          shift and go to state 18
+
+state 9
+
+    (19) funcdec -> VOID . ID LRB paramdecs RRB block
+    (20) funcdec -> VOID . ID LRB RRB block
+
+    ID              shift and go to state 19
+
+
+state 10
+
+    (8) type -> INTEGER .
+
+    ID              reduce using rule 8 (type -> INTEGER .)
+
+
+state 11
+
+    (9) type -> FLOAT .
+
+    ID              reduce using rule 9 (type -> FLOAT .)
+
+
+state 12
+
+    (10) type -> BOOLEAN .
+
+    ID              reduce using rule 10 (type -> BOOLEAN .)
+
+
+state 13
+
+    (2) begin -> declist MAIN . LRB RRB block
+
+    LRB             shift and go to state 20
+
+
+state 14
+
+    (5) declist -> declist dec .
+
+    MAIN            reduce using rule 5 (declist -> declist dec .)
+    VOID            reduce using rule 5 (declist -> declist dec .)
+    INTEGER         reduce using rule 5 (declist -> declist dec .)
+    FLOAT           reduce using rule 5 (declist -> declist dec .)
+    BOOLEAN         reduce using rule 5 (declist -> declist dec .)
+
+
+state 15
+
+    (3) begin -> MAIN LRB . RRB block
+
+    RRB             shift and go to state 21
+
+
+state 16
+
+    (16) vardec -> type idlist . SEMICOLON
+    (15) idlist -> idlist . COMMA iddec
+
+    SEMICOLON       shift and go to state 22
+    COMMA           shift and go to state 23
+
+
+state 17
+
+    (17) funcdec -> type ID . LRB paramdecs RRB block
+    (18) funcdec -> type ID . LRB RRB block
+    (11) iddec -> ID .
+    (12) iddec -> ID . LSB exp RSB
+    (13) iddec -> ID . ASSIGN exp
+
+    LRB             shift and go to state 24
+    SEMICOLON       reduce using rule 11 (iddec -> ID .)
+    COMMA           reduce using rule 11 (iddec -> ID .)
+    LSB             shift and go to state 25
+    ASSIGN          shift and go to state 26
+
+
+state 18
+
+    (14) idlist -> iddec .
+
+    SEMICOLON       reduce using rule 14 (idlist -> iddec .)
+    COMMA           reduce using rule 14 (idlist -> iddec .)
+
+
+state 19
+
+    (19) funcdec -> VOID ID . LRB paramdecs RRB block
+    (20) funcdec -> VOID ID . LRB RRB block
+
+    LRB             shift and go to state 27
+
+
+state 20
+
+    (2) begin -> declist MAIN LRB . RRB block
+
+    RRB             shift and go to state 28
+
+
+state 21
+
+    (3) begin -> MAIN LRB RRB . block
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+
+    LCB             shift and go to state 30
+
+    block                          shift and go to state 29
+
+state 22
+
+    (16) vardec -> type idlist SEMICOLON .
+
+    MAIN            reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    VOID            reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    INTEGER         reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    FLOAT           reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    BOOLEAN         reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    RCB             reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    RETURN          reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    WHILE           reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    FOR             reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    IF              reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    PRINT           reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    ID              reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    LRB             reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    SUB             reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    NOT             reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    LCB             reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    INTEGERNUMBER   reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    FLOATNUMBER     reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    TRUE            reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+    FALSE           reduce using rule 16 (vardec -> type idlist SEMICOLON .)
+
+
+state 23
+
+    (15) idlist -> idlist COMMA . iddec
+    (11) iddec -> . ID
+    (12) iddec -> . ID LSB exp RSB
+    (13) iddec -> . ID ASSIGN exp
+
+    ID              shift and go to state 32
+
+    iddec                          shift and go to state 31
+
+state 24
+
+    (17) funcdec -> type ID LRB . paramdecs RRB block
+    (18) funcdec -> type ID LRB . RRB block
+    (21) paramdecs -> . paramdecslist
+    (22) paramdecslist -> . paramdec
+    (23) paramdecslist -> . paramdecslist COMMA paramdec
+    (24) paramdec -> . type ID
+    (25) paramdec -> . type ID LSB RSB
+    (8) type -> . INTEGER
+    (9) type -> . FLOAT
+    (10) type -> . BOOLEAN
+
+    RRB             shift and go to state 35
+    INTEGER         shift and go to state 10
+    FLOAT           shift and go to state 11
+    BOOLEAN         shift and go to state 12
+
+    type                           shift and go to state 33
+    paramdecs                      shift and go to state 34
+    paramdecslist                  shift and go to state 36
+    paramdec                       shift and go to state 37
+
+state 25
+
+    (12) iddec -> ID LSB . exp RSB
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 39
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 26
+
+    (13) iddec -> ID ASSIGN . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 49
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 27
+
+    (19) funcdec -> VOID ID LRB . paramdecs RRB block
+    (20) funcdec -> VOID ID LRB . RRB block
+    (21) paramdecs -> . paramdecslist
+    (22) paramdecslist -> . paramdec
+    (23) paramdecslist -> . paramdecslist COMMA paramdec
+    (24) paramdec -> . type ID
+    (25) paramdec -> . type ID LSB RSB
+    (8) type -> . INTEGER
+    (9) type -> . FLOAT
+    (10) type -> . BOOLEAN
+
+    RRB             shift and go to state 51
+    INTEGER         shift and go to state 10
+    FLOAT           shift and go to state 11
+    BOOLEAN         shift and go to state 12
+
+    paramdecs                      shift and go to state 50
+    paramdecslist                  shift and go to state 36
+    paramdec                       shift and go to state 37
+    type                           shift and go to state 33
+
+state 28
+
+    (2) begin -> declist MAIN LRB RRB . block
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+
+    LCB             shift and go to state 30
+
+    block                          shift and go to state 52
+
+state 29
+
+    (3) begin -> MAIN LRB RRB block .
+
+    $end            reduce using rule 3 (begin -> MAIN LRB RRB block .)
+
+
+state 30
+
+    (28) block -> LCB . varlist stmtlist RCB
+    (29) block -> LCB . varlist RCB
+    (30) block -> LCB . stmtlist RCB
+    (31) block -> LCB . RCB
+    (26) varlist -> . vardec
+    (27) varlist -> . varlist vardec
+    (32) stmtlist -> . stmt
+    (33) stmtlist -> . stmtlist stmt
+    (16) vardec -> . type idlist SEMICOLON
+    (36) stmt -> . RETURN exp SEMICOLON
+    (37) stmt -> . exp SEMICOLON
+    (38) stmt -> . block
+    (39) stmt -> . WHILE LRB exp RRB stmt
+    (40) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+    (41) stmt -> . IF LRB exp RRB stmt elseiflist
+    (42) stmt -> . IF LRB exp RRB stmt
+    (43) stmt -> . IF LRB exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> . IF LRB exp RRB stmt ELSE stmt
+    (45) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (8) type -> . INTEGER
+    (9) type -> . FLOAT
+    (10) type -> . BOOLEAN
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    RCB             shift and go to state 55
+    RETURN          shift and go to state 59
+    WHILE           shift and go to state 62
+    FOR             shift and go to state 63
+    IF              shift and go to state 64
+    PRINT           shift and go to state 65
+    INTEGER         shift and go to state 10
+    FLOAT           shift and go to state 11
+    BOOLEAN         shift and go to state 12
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    LCB             shift and go to state 30
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    varlist                        shift and go to state 53
+    stmtlist                       shift and go to state 54
+    vardec                         shift and go to state 56
+    stmt                           shift and go to state 57
+    type                           shift and go to state 58
+    exp                            shift and go to state 60
+    block                          shift and go to state 61
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 31
+
+    (15) idlist -> idlist COMMA iddec .
+
+    SEMICOLON       reduce using rule 15 (idlist -> idlist COMMA iddec .)
+    COMMA           reduce using rule 15 (idlist -> idlist COMMA iddec .)
+
+
+state 32
+
+    (11) iddec -> ID .
+    (12) iddec -> ID . LSB exp RSB
+    (13) iddec -> ID . ASSIGN exp
+
+    SEMICOLON       reduce using rule 11 (iddec -> ID .)
+    COMMA           reduce using rule 11 (iddec -> ID .)
+    LSB             shift and go to state 25
+    ASSIGN          shift and go to state 26
+
+
+state 33
+
+    (24) paramdec -> type . ID
+    (25) paramdec -> type . ID LSB RSB
+
+    ID              shift and go to state 66
+
+
+state 34
+
+    (17) funcdec -> type ID LRB paramdecs . RRB block
+
+    RRB             shift and go to state 67
+
+
+state 35
+
+    (18) funcdec -> type ID LRB RRB . block
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+
+    LCB             shift and go to state 30
+
+    block                          shift and go to state 68
+
+state 36
+
+    (21) paramdecs -> paramdecslist .
+    (23) paramdecslist -> paramdecslist . COMMA paramdec
+
+    RRB             reduce using rule 21 (paramdecs -> paramdecslist .)
+    COMMA           shift and go to state 69
+
+
+state 37
+
+    (22) paramdecslist -> paramdec .
+
+    COMMA           reduce using rule 22 (paramdecslist -> paramdec .)
+    RRB             reduce using rule 22 (paramdecslist -> paramdec .)
+
+
+state 38
+
+    (58) exp -> ID . LRB explist RRB
+    (60) exp -> ID . LRB RRB
+    (34) lvalue -> ID .
+    (35) lvalue -> ID . LSB exp RSB
+
+    LRB             shift and go to state 70
+    ASSIGN          reduce using rule 34 (lvalue -> ID .)
+    RSB             reduce using rule 34 (lvalue -> ID .)
+    SUM             reduce using rule 34 (lvalue -> ID .)
+    SUB             reduce using rule 34 (lvalue -> ID .)
+    MUL             reduce using rule 34 (lvalue -> ID .)
+    DIV             reduce using rule 34 (lvalue -> ID .)
+    MOD             reduce using rule 34 (lvalue -> ID .)
+    OR              reduce using rule 34 (lvalue -> ID .)
+    AND             reduce using rule 34 (lvalue -> ID .)
+    GT              reduce using rule 34 (lvalue -> ID .)
+    LT              reduce using rule 34 (lvalue -> ID .)
+    NE              reduce using rule 34 (lvalue -> ID .)
+    EQ              reduce using rule 34 (lvalue -> ID .)
+    LE              reduce using rule 34 (lvalue -> ID .)
+    GE              reduce using rule 34 (lvalue -> ID .)
+    SEMICOLON       reduce using rule 34 (lvalue -> ID .)
+    COMMA           reduce using rule 34 (lvalue -> ID .)
+    RRB             reduce using rule 34 (lvalue -> ID .)
+    LSB             shift and go to state 71
+
+
+state 39
+
+    (12) iddec -> ID LSB exp . RSB
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             shift and go to state 72
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 40
+
+    (48) exp -> lvalue . ASSIGN exp
+    (57) exp -> lvalue .
+
+    ASSIGN          shift and go to state 86
+    RSB             reduce using rule 57 (exp -> lvalue .)
+    SUM             reduce using rule 57 (exp -> lvalue .)
+    SUB             reduce using rule 57 (exp -> lvalue .)
+    MUL             reduce using rule 57 (exp -> lvalue .)
+    DIV             reduce using rule 57 (exp -> lvalue .)
+    MOD             reduce using rule 57 (exp -> lvalue .)
+    OR              reduce using rule 57 (exp -> lvalue .)
+    AND             reduce using rule 57 (exp -> lvalue .)
+    GT              reduce using rule 57 (exp -> lvalue .)
+    LT              reduce using rule 57 (exp -> lvalue .)
+    NE              reduce using rule 57 (exp -> lvalue .)
+    EQ              reduce using rule 57 (exp -> lvalue .)
+    LE              reduce using rule 57 (exp -> lvalue .)
+    GE              reduce using rule 57 (exp -> lvalue .)
+    SEMICOLON       reduce using rule 57 (exp -> lvalue .)
+    COMMA           reduce using rule 57 (exp -> lvalue .)
+    RRB             reduce using rule 57 (exp -> lvalue .)
+
+
+state 41
+
+    (61) exp -> SUB . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 87
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 42
+
+    (56) exp -> const .
+
+    RSB             reduce using rule 56 (exp -> const .)
+    SUM             reduce using rule 56 (exp -> const .)
+    SUB             reduce using rule 56 (exp -> const .)
+    MUL             reduce using rule 56 (exp -> const .)
+    DIV             reduce using rule 56 (exp -> const .)
+    MOD             reduce using rule 56 (exp -> const .)
+    OR              reduce using rule 56 (exp -> const .)
+    AND             reduce using rule 56 (exp -> const .)
+    GT              reduce using rule 56 (exp -> const .)
+    LT              reduce using rule 56 (exp -> const .)
+    NE              reduce using rule 56 (exp -> const .)
+    EQ              reduce using rule 56 (exp -> const .)
+    LE              reduce using rule 56 (exp -> const .)
+    GE              reduce using rule 56 (exp -> const .)
+    SEMICOLON       reduce using rule 56 (exp -> const .)
+    COMMA           reduce using rule 56 (exp -> const .)
+    RRB             reduce using rule 56 (exp -> const .)
+
+
+state 43
+
+    (59) exp -> LRB . exp RRB
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 88
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 44
+
+    (62) exp -> NOT . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 89
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 45
+
+    (63) const -> INTEGERNUMBER .
+
+    RSB             reduce using rule 63 (const -> INTEGERNUMBER .)
+    SUM             reduce using rule 63 (const -> INTEGERNUMBER .)
+    SUB             reduce using rule 63 (const -> INTEGERNUMBER .)
+    MUL             reduce using rule 63 (const -> INTEGERNUMBER .)
+    DIV             reduce using rule 63 (const -> INTEGERNUMBER .)
+    MOD             reduce using rule 63 (const -> INTEGERNUMBER .)
+    OR              reduce using rule 63 (const -> INTEGERNUMBER .)
+    AND             reduce using rule 63 (const -> INTEGERNUMBER .)
+    GT              reduce using rule 63 (const -> INTEGERNUMBER .)
+    LT              reduce using rule 63 (const -> INTEGERNUMBER .)
+    NE              reduce using rule 63 (const -> INTEGERNUMBER .)
+    EQ              reduce using rule 63 (const -> INTEGERNUMBER .)
+    LE              reduce using rule 63 (const -> INTEGERNUMBER .)
+    GE              reduce using rule 63 (const -> INTEGERNUMBER .)
+    SEMICOLON       reduce using rule 63 (const -> INTEGERNUMBER .)
+    COMMA           reduce using rule 63 (const -> INTEGERNUMBER .)
+    RRB             reduce using rule 63 (const -> INTEGERNUMBER .)
+
+
+state 46
+
+    (64) const -> FLOATNUMBER .
+
+    RSB             reduce using rule 64 (const -> FLOATNUMBER .)
+    SUM             reduce using rule 64 (const -> FLOATNUMBER .)
+    SUB             reduce using rule 64 (const -> FLOATNUMBER .)
+    MUL             reduce using rule 64 (const -> FLOATNUMBER .)
+    DIV             reduce using rule 64 (const -> FLOATNUMBER .)
+    MOD             reduce using rule 64 (const -> FLOATNUMBER .)
+    OR              reduce using rule 64 (const -> FLOATNUMBER .)
+    AND             reduce using rule 64 (const -> FLOATNUMBER .)
+    GT              reduce using rule 64 (const -> FLOATNUMBER .)
+    LT              reduce using rule 64 (const -> FLOATNUMBER .)
+    NE              reduce using rule 64 (const -> FLOATNUMBER .)
+    EQ              reduce using rule 64 (const -> FLOATNUMBER .)
+    LE              reduce using rule 64 (const -> FLOATNUMBER .)
+    GE              reduce using rule 64 (const -> FLOATNUMBER .)
+    SEMICOLON       reduce using rule 64 (const -> FLOATNUMBER .)
+    COMMA           reduce using rule 64 (const -> FLOATNUMBER .)
+    RRB             reduce using rule 64 (const -> FLOATNUMBER .)
+
+
+state 47
+
+    (65) const -> TRUE .
+
+    RSB             reduce using rule 65 (const -> TRUE .)
+    SUM             reduce using rule 65 (const -> TRUE .)
+    SUB             reduce using rule 65 (const -> TRUE .)
+    MUL             reduce using rule 65 (const -> TRUE .)
+    DIV             reduce using rule 65 (const -> TRUE .)
+    MOD             reduce using rule 65 (const -> TRUE .)
+    OR              reduce using rule 65 (const -> TRUE .)
+    AND             reduce using rule 65 (const -> TRUE .)
+    GT              reduce using rule 65 (const -> TRUE .)
+    LT              reduce using rule 65 (const -> TRUE .)
+    NE              reduce using rule 65 (const -> TRUE .)
+    EQ              reduce using rule 65 (const -> TRUE .)
+    LE              reduce using rule 65 (const -> TRUE .)
+    GE              reduce using rule 65 (const -> TRUE .)
+    SEMICOLON       reduce using rule 65 (const -> TRUE .)
+    COMMA           reduce using rule 65 (const -> TRUE .)
+    RRB             reduce using rule 65 (const -> TRUE .)
+
+
+state 48
+
+    (66) const -> FALSE .
+
+    RSB             reduce using rule 66 (const -> FALSE .)
+    SUM             reduce using rule 66 (const -> FALSE .)
+    SUB             reduce using rule 66 (const -> FALSE .)
+    MUL             reduce using rule 66 (const -> FALSE .)
+    DIV             reduce using rule 66 (const -> FALSE .)
+    MOD             reduce using rule 66 (const -> FALSE .)
+    OR              reduce using rule 66 (const -> FALSE .)
+    AND             reduce using rule 66 (const -> FALSE .)
+    GT              reduce using rule 66 (const -> FALSE .)
+    LT              reduce using rule 66 (const -> FALSE .)
+    NE              reduce using rule 66 (const -> FALSE .)
+    EQ              reduce using rule 66 (const -> FALSE .)
+    LE              reduce using rule 66 (const -> FALSE .)
+    GE              reduce using rule 66 (const -> FALSE .)
+    SEMICOLON       reduce using rule 66 (const -> FALSE .)
+    COMMA           reduce using rule 66 (const -> FALSE .)
+    RRB             reduce using rule 66 (const -> FALSE .)
+
+
+state 49
+
+    (13) iddec -> ID ASSIGN exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    SEMICOLON       reduce using rule 13 (iddec -> ID ASSIGN exp .)
+    COMMA           reduce using rule 13 (iddec -> ID ASSIGN exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 50
+
+    (19) funcdec -> VOID ID LRB paramdecs . RRB block
+
+    RRB             shift and go to state 90
+
+
+state 51
+
+    (20) funcdec -> VOID ID LRB RRB . block
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+
+    LCB             shift and go to state 30
+
+    block                          shift and go to state 91
+
+state 52
+
+    (2) begin -> declist MAIN LRB RRB block .
+
+    $end            reduce using rule 2 (begin -> declist MAIN LRB RRB block .)
+
+
+state 53
+
+    (28) block -> LCB varlist . stmtlist RCB
+    (29) block -> LCB varlist . RCB
+    (27) varlist -> varlist . vardec
+    (32) stmtlist -> . stmt
+    (33) stmtlist -> . stmtlist stmt
+    (16) vardec -> . type idlist SEMICOLON
+    (36) stmt -> . RETURN exp SEMICOLON
+    (37) stmt -> . exp SEMICOLON
+    (38) stmt -> . block
+    (39) stmt -> . WHILE LRB exp RRB stmt
+    (40) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+    (41) stmt -> . IF LRB exp RRB stmt elseiflist
+    (42) stmt -> . IF LRB exp RRB stmt
+    (43) stmt -> . IF LRB exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> . IF LRB exp RRB stmt ELSE stmt
+    (45) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (8) type -> . INTEGER
+    (9) type -> . FLOAT
+    (10) type -> . BOOLEAN
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    RCB             shift and go to state 93
+    RETURN          shift and go to state 59
+    WHILE           shift and go to state 62
+    FOR             shift and go to state 63
+    IF              shift and go to state 64
+    PRINT           shift and go to state 65
+    INTEGER         shift and go to state 10
+    FLOAT           shift and go to state 11
+    BOOLEAN         shift and go to state 12
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    LCB             shift and go to state 30
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    stmtlist                       shift and go to state 92
+    vardec                         shift and go to state 94
+    stmt                           shift and go to state 57
+    type                           shift and go to state 58
+    exp                            shift and go to state 60
+    block                          shift and go to state 61
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 54
+
+    (30) block -> LCB stmtlist . RCB
+    (33) stmtlist -> stmtlist . stmt
+    (36) stmt -> . RETURN exp SEMICOLON
+    (37) stmt -> . exp SEMICOLON
+    (38) stmt -> . block
+    (39) stmt -> . WHILE LRB exp RRB stmt
+    (40) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+    (41) stmt -> . IF LRB exp RRB stmt elseiflist
+    (42) stmt -> . IF LRB exp RRB stmt
+    (43) stmt -> . IF LRB exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> . IF LRB exp RRB stmt ELSE stmt
+    (45) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    RCB             shift and go to state 95
+    RETURN          shift and go to state 59
+    WHILE           shift and go to state 62
+    FOR             shift and go to state 63
+    IF              shift and go to state 64
+    PRINT           shift and go to state 65
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    LCB             shift and go to state 30
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    stmt                           shift and go to state 96
+    exp                            shift and go to state 60
+    block                          shift and go to state 61
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 55
+
+    (31) block -> LCB RCB .
+
+    $end            reduce using rule 31 (block -> LCB RCB .)
+    RCB             reduce using rule 31 (block -> LCB RCB .)
+    RETURN          reduce using rule 31 (block -> LCB RCB .)
+    WHILE           reduce using rule 31 (block -> LCB RCB .)
+    FOR             reduce using rule 31 (block -> LCB RCB .)
+    IF              reduce using rule 31 (block -> LCB RCB .)
+    PRINT           reduce using rule 31 (block -> LCB RCB .)
+    ID              reduce using rule 31 (block -> LCB RCB .)
+    LRB             reduce using rule 31 (block -> LCB RCB .)
+    SUB             reduce using rule 31 (block -> LCB RCB .)
+    NOT             reduce using rule 31 (block -> LCB RCB .)
+    LCB             reduce using rule 31 (block -> LCB RCB .)
+    INTEGERNUMBER   reduce using rule 31 (block -> LCB RCB .)
+    FLOATNUMBER     reduce using rule 31 (block -> LCB RCB .)
+    TRUE            reduce using rule 31 (block -> LCB RCB .)
+    FALSE           reduce using rule 31 (block -> LCB RCB .)
+    MAIN            reduce using rule 31 (block -> LCB RCB .)
+    VOID            reduce using rule 31 (block -> LCB RCB .)
+    INTEGER         reduce using rule 31 (block -> LCB RCB .)
+    FLOAT           reduce using rule 31 (block -> LCB RCB .)
+    BOOLEAN         reduce using rule 31 (block -> LCB RCB .)
+    ELSE            reduce using rule 31 (block -> LCB RCB .)
+    ELIF            reduce using rule 31 (block -> LCB RCB .)
+
+
+state 56
+
+    (26) varlist -> vardec .
+
+    RCB             reduce using rule 26 (varlist -> vardec .)
+    RETURN          reduce using rule 26 (varlist -> vardec .)
+    WHILE           reduce using rule 26 (varlist -> vardec .)
+    FOR             reduce using rule 26 (varlist -> vardec .)
+    IF              reduce using rule 26 (varlist -> vardec .)
+    PRINT           reduce using rule 26 (varlist -> vardec .)
+    INTEGER         reduce using rule 26 (varlist -> vardec .)
+    FLOAT           reduce using rule 26 (varlist -> vardec .)
+    BOOLEAN         reduce using rule 26 (varlist -> vardec .)
+    ID              reduce using rule 26 (varlist -> vardec .)
+    LRB             reduce using rule 26 (varlist -> vardec .)
+    SUB             reduce using rule 26 (varlist -> vardec .)
+    NOT             reduce using rule 26 (varlist -> vardec .)
+    LCB             reduce using rule 26 (varlist -> vardec .)
+    INTEGERNUMBER   reduce using rule 26 (varlist -> vardec .)
+    FLOATNUMBER     reduce using rule 26 (varlist -> vardec .)
+    TRUE            reduce using rule 26 (varlist -> vardec .)
+    FALSE           reduce using rule 26 (varlist -> vardec .)
+
+
+state 57
+
+    (32) stmtlist -> stmt .
+
+    RCB             reduce using rule 32 (stmtlist -> stmt .)
+    RETURN          reduce using rule 32 (stmtlist -> stmt .)
+    WHILE           reduce using rule 32 (stmtlist -> stmt .)
+    FOR             reduce using rule 32 (stmtlist -> stmt .)
+    IF              reduce using rule 32 (stmtlist -> stmt .)
+    PRINT           reduce using rule 32 (stmtlist -> stmt .)
+    ID              reduce using rule 32 (stmtlist -> stmt .)
+    LRB             reduce using rule 32 (stmtlist -> stmt .)
+    SUB             reduce using rule 32 (stmtlist -> stmt .)
+    NOT             reduce using rule 32 (stmtlist -> stmt .)
+    LCB             reduce using rule 32 (stmtlist -> stmt .)
+    INTEGERNUMBER   reduce using rule 32 (stmtlist -> stmt .)
+    FLOATNUMBER     reduce using rule 32 (stmtlist -> stmt .)
+    TRUE            reduce using rule 32 (stmtlist -> stmt .)
+    FALSE           reduce using rule 32 (stmtlist -> stmt .)
+
+
+state 58
+
+    (16) vardec -> type . idlist SEMICOLON
+    (14) idlist -> . iddec
+    (15) idlist -> . idlist COMMA iddec
+    (11) iddec -> . ID
+    (12) iddec -> . ID LSB exp RSB
+    (13) iddec -> . ID ASSIGN exp
+
+    ID              shift and go to state 32
+
+    idlist                         shift and go to state 16
+    iddec                          shift and go to state 18
+
+state 59
+
+    (36) stmt -> RETURN . exp SEMICOLON
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 97
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 60
+
+    (37) stmt -> exp . SEMICOLON
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    SEMICOLON       shift and go to state 98
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 61
+
+    (38) stmt -> block .
+
+    RCB             reduce using rule 38 (stmt -> block .)
+    RETURN          reduce using rule 38 (stmt -> block .)
+    WHILE           reduce using rule 38 (stmt -> block .)
+    FOR             reduce using rule 38 (stmt -> block .)
+    IF              reduce using rule 38 (stmt -> block .)
+    PRINT           reduce using rule 38 (stmt -> block .)
+    ID              reduce using rule 38 (stmt -> block .)
+    LRB             reduce using rule 38 (stmt -> block .)
+    SUB             reduce using rule 38 (stmt -> block .)
+    NOT             reduce using rule 38 (stmt -> block .)
+    LCB             reduce using rule 38 (stmt -> block .)
+    INTEGERNUMBER   reduce using rule 38 (stmt -> block .)
+    FLOATNUMBER     reduce using rule 38 (stmt -> block .)
+    TRUE            reduce using rule 38 (stmt -> block .)
+    FALSE           reduce using rule 38 (stmt -> block .)
+    ELSE            reduce using rule 38 (stmt -> block .)
+    ELIF            reduce using rule 38 (stmt -> block .)
+
+
+state 62
+
+    (39) stmt -> WHILE . LRB exp RRB stmt
+
+    LRB             shift and go to state 99
+
+
+state 63
+
+    (40) stmt -> FOR . LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+
+    LRB             shift and go to state 100
+
+
+state 64
+
+    (41) stmt -> IF . LRB exp RRB stmt elseiflist
+    (42) stmt -> IF . LRB exp RRB stmt
+    (43) stmt -> IF . LRB exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> IF . LRB exp RRB stmt ELSE stmt
+
+    LRB             shift and go to state 101
+
+
+state 65
+
+    (45) stmt -> PRINT . LRB ID RRB SEMICOLON
+
+    LRB             shift and go to state 102
+
+
+state 66
+
+    (24) paramdec -> type ID .
+    (25) paramdec -> type ID . LSB RSB
+
+    COMMA           reduce using rule 24 (paramdec -> type ID .)
+    RRB             reduce using rule 24 (paramdec -> type ID .)
+    LSB             shift and go to state 103
+
+
+state 67
+
+    (17) funcdec -> type ID LRB paramdecs RRB . block
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+
+    LCB             shift and go to state 30
+
+    block                          shift and go to state 104
+
+state 68
+
+    (18) funcdec -> type ID LRB RRB block .
+
+    MAIN            reduce using rule 18 (funcdec -> type ID LRB RRB block .)
+    VOID            reduce using rule 18 (funcdec -> type ID LRB RRB block .)
+    INTEGER         reduce using rule 18 (funcdec -> type ID LRB RRB block .)
+    FLOAT           reduce using rule 18 (funcdec -> type ID LRB RRB block .)
+    BOOLEAN         reduce using rule 18 (funcdec -> type ID LRB RRB block .)
+
+
+state 69
+
+    (23) paramdecslist -> paramdecslist COMMA . paramdec
+    (24) paramdec -> . type ID
+    (25) paramdec -> . type ID LSB RSB
+    (8) type -> . INTEGER
+    (9) type -> . FLOAT
+    (10) type -> . BOOLEAN
+
+    INTEGER         shift and go to state 10
+    FLOAT           shift and go to state 11
+    BOOLEAN         shift and go to state 12
+
+    paramdec                       shift and go to state 105
+    type                           shift and go to state 33
+
+state 70
+
+    (58) exp -> ID LRB . explist RRB
+    (60) exp -> ID LRB . RRB
+    (73) explist -> . exp
+    (74) explist -> . explist COMMA exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    RRB             shift and go to state 107
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    explist                        shift and go to state 106
+    exp                            shift and go to state 108
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 71
+
+    (35) lvalue -> ID LSB . exp RSB
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 109
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 72
+
+    (12) iddec -> ID LSB exp RSB .
+
+    SEMICOLON       reduce using rule 12 (iddec -> ID LSB exp RSB .)
+    COMMA           reduce using rule 12 (iddec -> ID LSB exp RSB .)
+
+
+state 73
+
+    (49) exp -> exp SUM . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 110
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 74
+
+    (50) exp -> exp SUB . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 111
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 75
+
+    (51) exp -> exp MUL . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 112
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 76
+
+    (52) exp -> exp DIV . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 113
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 77
+
+    (53) exp -> exp MOD . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 114
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 78
+
+    (54) exp -> exp OR . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 115
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 79
+
+    (55) exp -> exp AND . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 116
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 80
+
+    (67) exp -> exp GT . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 117
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 81
+
+    (68) exp -> exp LT . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 118
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 82
+
+    (69) exp -> exp NE . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 119
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 83
+
+    (70) exp -> exp EQ . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 120
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 84
+
+    (71) exp -> exp LE . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 121
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 85
+
+    (72) exp -> exp GE . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 122
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 86
+
+    (48) exp -> lvalue ASSIGN . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    lvalue                         shift and go to state 40
+    exp                            shift and go to state 123
+    const                          shift and go to state 42
+
+state 87
+
+    (61) exp -> SUB exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 61 (exp -> SUB exp .)
+    SUM             reduce using rule 61 (exp -> SUB exp .)
+    SUB             reduce using rule 61 (exp -> SUB exp .)
+    OR              reduce using rule 61 (exp -> SUB exp .)
+    AND             reduce using rule 61 (exp -> SUB exp .)
+    GT              reduce using rule 61 (exp -> SUB exp .)
+    LT              reduce using rule 61 (exp -> SUB exp .)
+    NE              reduce using rule 61 (exp -> SUB exp .)
+    EQ              reduce using rule 61 (exp -> SUB exp .)
+    LE              reduce using rule 61 (exp -> SUB exp .)
+    GE              reduce using rule 61 (exp -> SUB exp .)
+    SEMICOLON       reduce using rule 61 (exp -> SUB exp .)
+    COMMA           reduce using rule 61 (exp -> SUB exp .)
+    RRB             reduce using rule 61 (exp -> SUB exp .)
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+
+  ! MUL             [ reduce using rule 61 (exp -> SUB exp .) ]
+  ! DIV             [ reduce using rule 61 (exp -> SUB exp .) ]
+  ! MOD             [ reduce using rule 61 (exp -> SUB exp .) ]
+  ! SUM             [ shift and go to state 73 ]
+  ! SUB             [ shift and go to state 74 ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+  ! GT              [ shift and go to state 80 ]
+  ! LT              [ shift and go to state 81 ]
+  ! NE              [ shift and go to state 82 ]
+  ! EQ              [ shift and go to state 83 ]
+  ! LE              [ shift and go to state 84 ]
+  ! GE              [ shift and go to state 85 ]
+
+
+state 88
+
+    (59) exp -> LRB exp . RRB
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RRB             shift and go to state 124
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 89
+
+    (62) exp -> NOT exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 62 (exp -> NOT exp .)
+    SEMICOLON       reduce using rule 62 (exp -> NOT exp .)
+    COMMA           reduce using rule 62 (exp -> NOT exp .)
+    RRB             reduce using rule 62 (exp -> NOT exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+  ! SUM             [ reduce using rule 62 (exp -> NOT exp .) ]
+  ! SUB             [ reduce using rule 62 (exp -> NOT exp .) ]
+  ! MUL             [ reduce using rule 62 (exp -> NOT exp .) ]
+  ! DIV             [ reduce using rule 62 (exp -> NOT exp .) ]
+  ! MOD             [ reduce using rule 62 (exp -> NOT exp .) ]
+  ! OR              [ reduce using rule 62 (exp -> NOT exp .) ]
+  ! AND             [ reduce using rule 62 (exp -> NOT exp .) ]
+  ! GT              [ reduce using rule 62 (exp -> NOT exp .) ]
+  ! LT              [ reduce using rule 62 (exp -> NOT exp .) ]
+  ! NE              [ reduce using rule 62 (exp -> NOT exp .) ]
+  ! EQ              [ reduce using rule 62 (exp -> NOT exp .) ]
+  ! LE              [ reduce using rule 62 (exp -> NOT exp .) ]
+  ! GE              [ reduce using rule 62 (exp -> NOT exp .) ]
+
+
+state 90
+
+    (19) funcdec -> VOID ID LRB paramdecs RRB . block
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+
+    LCB             shift and go to state 30
+
+    block                          shift and go to state 125
+
+state 91
+
+    (20) funcdec -> VOID ID LRB RRB block .
+
+    MAIN            reduce using rule 20 (funcdec -> VOID ID LRB RRB block .)
+    VOID            reduce using rule 20 (funcdec -> VOID ID LRB RRB block .)
+    INTEGER         reduce using rule 20 (funcdec -> VOID ID LRB RRB block .)
+    FLOAT           reduce using rule 20 (funcdec -> VOID ID LRB RRB block .)
+    BOOLEAN         reduce using rule 20 (funcdec -> VOID ID LRB RRB block .)
+
+
+state 92
+
+    (28) block -> LCB varlist stmtlist . RCB
+    (33) stmtlist -> stmtlist . stmt
+    (36) stmt -> . RETURN exp SEMICOLON
+    (37) stmt -> . exp SEMICOLON
+    (38) stmt -> . block
+    (39) stmt -> . WHILE LRB exp RRB stmt
+    (40) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+    (41) stmt -> . IF LRB exp RRB stmt elseiflist
+    (42) stmt -> . IF LRB exp RRB stmt
+    (43) stmt -> . IF LRB exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> . IF LRB exp RRB stmt ELSE stmt
+    (45) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    RCB             shift and go to state 126
+    RETURN          shift and go to state 59
+    WHILE           shift and go to state 62
+    FOR             shift and go to state 63
+    IF              shift and go to state 64
+    PRINT           shift and go to state 65
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    LCB             shift and go to state 30
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    stmt                           shift and go to state 96
+    exp                            shift and go to state 60
+    block                          shift and go to state 61
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 93
+
+    (29) block -> LCB varlist RCB .
+
+    $end            reduce using rule 29 (block -> LCB varlist RCB .)
+    RCB             reduce using rule 29 (block -> LCB varlist RCB .)
+    RETURN          reduce using rule 29 (block -> LCB varlist RCB .)
+    WHILE           reduce using rule 29 (block -> LCB varlist RCB .)
+    FOR             reduce using rule 29 (block -> LCB varlist RCB .)
+    IF              reduce using rule 29 (block -> LCB varlist RCB .)
+    PRINT           reduce using rule 29 (block -> LCB varlist RCB .)
+    ID              reduce using rule 29 (block -> LCB varlist RCB .)
+    LRB             reduce using rule 29 (block -> LCB varlist RCB .)
+    SUB             reduce using rule 29 (block -> LCB varlist RCB .)
+    NOT             reduce using rule 29 (block -> LCB varlist RCB .)
+    LCB             reduce using rule 29 (block -> LCB varlist RCB .)
+    INTEGERNUMBER   reduce using rule 29 (block -> LCB varlist RCB .)
+    FLOATNUMBER     reduce using rule 29 (block -> LCB varlist RCB .)
+    TRUE            reduce using rule 29 (block -> LCB varlist RCB .)
+    FALSE           reduce using rule 29 (block -> LCB varlist RCB .)
+    MAIN            reduce using rule 29 (block -> LCB varlist RCB .)
+    VOID            reduce using rule 29 (block -> LCB varlist RCB .)
+    INTEGER         reduce using rule 29 (block -> LCB varlist RCB .)
+    FLOAT           reduce using rule 29 (block -> LCB varlist RCB .)
+    BOOLEAN         reduce using rule 29 (block -> LCB varlist RCB .)
+    ELSE            reduce using rule 29 (block -> LCB varlist RCB .)
+    ELIF            reduce using rule 29 (block -> LCB varlist RCB .)
+
+
+state 94
+
+    (27) varlist -> varlist vardec .
+
+    RCB             reduce using rule 27 (varlist -> varlist vardec .)
+    RETURN          reduce using rule 27 (varlist -> varlist vardec .)
+    WHILE           reduce using rule 27 (varlist -> varlist vardec .)
+    FOR             reduce using rule 27 (varlist -> varlist vardec .)
+    IF              reduce using rule 27 (varlist -> varlist vardec .)
+    PRINT           reduce using rule 27 (varlist -> varlist vardec .)
+    INTEGER         reduce using rule 27 (varlist -> varlist vardec .)
+    FLOAT           reduce using rule 27 (varlist -> varlist vardec .)
+    BOOLEAN         reduce using rule 27 (varlist -> varlist vardec .)
+    ID              reduce using rule 27 (varlist -> varlist vardec .)
+    LRB             reduce using rule 27 (varlist -> varlist vardec .)
+    SUB             reduce using rule 27 (varlist -> varlist vardec .)
+    NOT             reduce using rule 27 (varlist -> varlist vardec .)
+    LCB             reduce using rule 27 (varlist -> varlist vardec .)
+    INTEGERNUMBER   reduce using rule 27 (varlist -> varlist vardec .)
+    FLOATNUMBER     reduce using rule 27 (varlist -> varlist vardec .)
+    TRUE            reduce using rule 27 (varlist -> varlist vardec .)
+    FALSE           reduce using rule 27 (varlist -> varlist vardec .)
+
+
+state 95
+
+    (30) block -> LCB stmtlist RCB .
+
+    $end            reduce using rule 30 (block -> LCB stmtlist RCB .)
+    RCB             reduce using rule 30 (block -> LCB stmtlist RCB .)
+    RETURN          reduce using rule 30 (block -> LCB stmtlist RCB .)
+    WHILE           reduce using rule 30 (block -> LCB stmtlist RCB .)
+    FOR             reduce using rule 30 (block -> LCB stmtlist RCB .)
+    IF              reduce using rule 30 (block -> LCB stmtlist RCB .)
+    PRINT           reduce using rule 30 (block -> LCB stmtlist RCB .)
+    ID              reduce using rule 30 (block -> LCB stmtlist RCB .)
+    LRB             reduce using rule 30 (block -> LCB stmtlist RCB .)
+    SUB             reduce using rule 30 (block -> LCB stmtlist RCB .)
+    NOT             reduce using rule 30 (block -> LCB stmtlist RCB .)
+    LCB             reduce using rule 30 (block -> LCB stmtlist RCB .)
+    INTEGERNUMBER   reduce using rule 30 (block -> LCB stmtlist RCB .)
+    FLOATNUMBER     reduce using rule 30 (block -> LCB stmtlist RCB .)
+    TRUE            reduce using rule 30 (block -> LCB stmtlist RCB .)
+    FALSE           reduce using rule 30 (block -> LCB stmtlist RCB .)
+    MAIN            reduce using rule 30 (block -> LCB stmtlist RCB .)
+    VOID            reduce using rule 30 (block -> LCB stmtlist RCB .)
+    INTEGER         reduce using rule 30 (block -> LCB stmtlist RCB .)
+    FLOAT           reduce using rule 30 (block -> LCB stmtlist RCB .)
+    BOOLEAN         reduce using rule 30 (block -> LCB stmtlist RCB .)
+    ELSE            reduce using rule 30 (block -> LCB stmtlist RCB .)
+    ELIF            reduce using rule 30 (block -> LCB stmtlist RCB .)
+
+
+state 96
+
+    (33) stmtlist -> stmtlist stmt .
+
+    RCB             reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    RETURN          reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    WHILE           reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    FOR             reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    IF              reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    PRINT           reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    ID              reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    LRB             reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    SUB             reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    NOT             reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    LCB             reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    INTEGERNUMBER   reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    FLOATNUMBER     reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    TRUE            reduce using rule 33 (stmtlist -> stmtlist stmt .)
+    FALSE           reduce using rule 33 (stmtlist -> stmtlist stmt .)
+
+
+state 97
+
+    (36) stmt -> RETURN exp . SEMICOLON
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    SEMICOLON       shift and go to state 127
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 98
+
+    (37) stmt -> exp SEMICOLON .
+
+    RCB             reduce using rule 37 (stmt -> exp SEMICOLON .)
+    RETURN          reduce using rule 37 (stmt -> exp SEMICOLON .)
+    WHILE           reduce using rule 37 (stmt -> exp SEMICOLON .)
+    FOR             reduce using rule 37 (stmt -> exp SEMICOLON .)
+    IF              reduce using rule 37 (stmt -> exp SEMICOLON .)
+    PRINT           reduce using rule 37 (stmt -> exp SEMICOLON .)
+    ID              reduce using rule 37 (stmt -> exp SEMICOLON .)
+    LRB             reduce using rule 37 (stmt -> exp SEMICOLON .)
+    SUB             reduce using rule 37 (stmt -> exp SEMICOLON .)
+    NOT             reduce using rule 37 (stmt -> exp SEMICOLON .)
+    LCB             reduce using rule 37 (stmt -> exp SEMICOLON .)
+    INTEGERNUMBER   reduce using rule 37 (stmt -> exp SEMICOLON .)
+    FLOATNUMBER     reduce using rule 37 (stmt -> exp SEMICOLON .)
+    TRUE            reduce using rule 37 (stmt -> exp SEMICOLON .)
+    FALSE           reduce using rule 37 (stmt -> exp SEMICOLON .)
+    ELSE            reduce using rule 37 (stmt -> exp SEMICOLON .)
+    ELIF            reduce using rule 37 (stmt -> exp SEMICOLON .)
+
+
+state 99
+
+    (39) stmt -> WHILE LRB . exp RRB stmt
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 128
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 100
+
+    (40) stmt -> FOR LRB . exp SEMICOLON exp SEMICOLON exp RRB stmt
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 129
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 101
+
+    (41) stmt -> IF LRB . exp RRB stmt elseiflist
+    (42) stmt -> IF LRB . exp RRB stmt
+    (43) stmt -> IF LRB . exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> IF LRB . exp RRB stmt ELSE stmt
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 130
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 102
+
+    (45) stmt -> PRINT LRB . ID RRB SEMICOLON
+
+    ID              shift and go to state 131
+
+
+state 103
+
+    (25) paramdec -> type ID LSB . RSB
+
+    RSB             shift and go to state 132
+
+
+state 104
+
+    (17) funcdec -> type ID LRB paramdecs RRB block .
+
+    MAIN            reduce using rule 17 (funcdec -> type ID LRB paramdecs RRB block .)
+    VOID            reduce using rule 17 (funcdec -> type ID LRB paramdecs RRB block .)
+    INTEGER         reduce using rule 17 (funcdec -> type ID LRB paramdecs RRB block .)
+    FLOAT           reduce using rule 17 (funcdec -> type ID LRB paramdecs RRB block .)
+    BOOLEAN         reduce using rule 17 (funcdec -> type ID LRB paramdecs RRB block .)
+
+
+state 105
+
+    (23) paramdecslist -> paramdecslist COMMA paramdec .
+
+    COMMA           reduce using rule 23 (paramdecslist -> paramdecslist COMMA paramdec .)
+    RRB             reduce using rule 23 (paramdecslist -> paramdecslist COMMA paramdec .)
+
+
+state 106
+
+    (58) exp -> ID LRB explist . RRB
+    (74) explist -> explist . COMMA exp
+
+    RRB             shift and go to state 133
+    COMMA           shift and go to state 134
+
+
+state 107
+
+    (60) exp -> ID LRB RRB .
+
+    RSB             reduce using rule 60 (exp -> ID LRB RRB .)
+    SUM             reduce using rule 60 (exp -> ID LRB RRB .)
+    SUB             reduce using rule 60 (exp -> ID LRB RRB .)
+    MUL             reduce using rule 60 (exp -> ID LRB RRB .)
+    DIV             reduce using rule 60 (exp -> ID LRB RRB .)
+    MOD             reduce using rule 60 (exp -> ID LRB RRB .)
+    OR              reduce using rule 60 (exp -> ID LRB RRB .)
+    AND             reduce using rule 60 (exp -> ID LRB RRB .)
+    GT              reduce using rule 60 (exp -> ID LRB RRB .)
+    LT              reduce using rule 60 (exp -> ID LRB RRB .)
+    NE              reduce using rule 60 (exp -> ID LRB RRB .)
+    EQ              reduce using rule 60 (exp -> ID LRB RRB .)
+    LE              reduce using rule 60 (exp -> ID LRB RRB .)
+    GE              reduce using rule 60 (exp -> ID LRB RRB .)
+    SEMICOLON       reduce using rule 60 (exp -> ID LRB RRB .)
+    COMMA           reduce using rule 60 (exp -> ID LRB RRB .)
+    RRB             reduce using rule 60 (exp -> ID LRB RRB .)
+
+
+state 108
+
+    (73) explist -> exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RRB             reduce using rule 73 (explist -> exp .)
+    COMMA           reduce using rule 73 (explist -> exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 109
+
+    (35) lvalue -> ID LSB exp . RSB
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             shift and go to state 135
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 110
+
+    (49) exp -> exp SUM exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 49 (exp -> exp SUM exp .)
+    SUM             reduce using rule 49 (exp -> exp SUM exp .)
+    SUB             reduce using rule 49 (exp -> exp SUM exp .)
+    OR              reduce using rule 49 (exp -> exp SUM exp .)
+    AND             reduce using rule 49 (exp -> exp SUM exp .)
+    GT              reduce using rule 49 (exp -> exp SUM exp .)
+    LT              reduce using rule 49 (exp -> exp SUM exp .)
+    NE              reduce using rule 49 (exp -> exp SUM exp .)
+    EQ              reduce using rule 49 (exp -> exp SUM exp .)
+    LE              reduce using rule 49 (exp -> exp SUM exp .)
+    GE              reduce using rule 49 (exp -> exp SUM exp .)
+    SEMICOLON       reduce using rule 49 (exp -> exp SUM exp .)
+    COMMA           reduce using rule 49 (exp -> exp SUM exp .)
+    RRB             reduce using rule 49 (exp -> exp SUM exp .)
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+
+  ! MUL             [ reduce using rule 49 (exp -> exp SUM exp .) ]
+  ! DIV             [ reduce using rule 49 (exp -> exp SUM exp .) ]
+  ! MOD             [ reduce using rule 49 (exp -> exp SUM exp .) ]
+  ! SUM             [ shift and go to state 73 ]
+  ! SUB             [ shift and go to state 74 ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+  ! GT              [ shift and go to state 80 ]
+  ! LT              [ shift and go to state 81 ]
+  ! NE              [ shift and go to state 82 ]
+  ! EQ              [ shift and go to state 83 ]
+  ! LE              [ shift and go to state 84 ]
+  ! GE              [ shift and go to state 85 ]
+
+
+state 111
+
+    (50) exp -> exp SUB exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 50 (exp -> exp SUB exp .)
+    SUM             reduce using rule 50 (exp -> exp SUB exp .)
+    SUB             reduce using rule 50 (exp -> exp SUB exp .)
+    OR              reduce using rule 50 (exp -> exp SUB exp .)
+    AND             reduce using rule 50 (exp -> exp SUB exp .)
+    GT              reduce using rule 50 (exp -> exp SUB exp .)
+    LT              reduce using rule 50 (exp -> exp SUB exp .)
+    NE              reduce using rule 50 (exp -> exp SUB exp .)
+    EQ              reduce using rule 50 (exp -> exp SUB exp .)
+    LE              reduce using rule 50 (exp -> exp SUB exp .)
+    GE              reduce using rule 50 (exp -> exp SUB exp .)
+    SEMICOLON       reduce using rule 50 (exp -> exp SUB exp .)
+    COMMA           reduce using rule 50 (exp -> exp SUB exp .)
+    RRB             reduce using rule 50 (exp -> exp SUB exp .)
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+
+  ! MUL             [ reduce using rule 50 (exp -> exp SUB exp .) ]
+  ! DIV             [ reduce using rule 50 (exp -> exp SUB exp .) ]
+  ! MOD             [ reduce using rule 50 (exp -> exp SUB exp .) ]
+  ! SUM             [ shift and go to state 73 ]
+  ! SUB             [ shift and go to state 74 ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+  ! GT              [ shift and go to state 80 ]
+  ! LT              [ shift and go to state 81 ]
+  ! NE              [ shift and go to state 82 ]
+  ! EQ              [ shift and go to state 83 ]
+  ! LE              [ shift and go to state 84 ]
+  ! GE              [ shift and go to state 85 ]
+
+
+state 112
+
+    (51) exp -> exp MUL exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 51 (exp -> exp MUL exp .)
+    SUM             reduce using rule 51 (exp -> exp MUL exp .)
+    SUB             reduce using rule 51 (exp -> exp MUL exp .)
+    MUL             reduce using rule 51 (exp -> exp MUL exp .)
+    DIV             reduce using rule 51 (exp -> exp MUL exp .)
+    MOD             reduce using rule 51 (exp -> exp MUL exp .)
+    OR              reduce using rule 51 (exp -> exp MUL exp .)
+    AND             reduce using rule 51 (exp -> exp MUL exp .)
+    GT              reduce using rule 51 (exp -> exp MUL exp .)
+    LT              reduce using rule 51 (exp -> exp MUL exp .)
+    NE              reduce using rule 51 (exp -> exp MUL exp .)
+    EQ              reduce using rule 51 (exp -> exp MUL exp .)
+    LE              reduce using rule 51 (exp -> exp MUL exp .)
+    GE              reduce using rule 51 (exp -> exp MUL exp .)
+    SEMICOLON       reduce using rule 51 (exp -> exp MUL exp .)
+    COMMA           reduce using rule 51 (exp -> exp MUL exp .)
+    RRB             reduce using rule 51 (exp -> exp MUL exp .)
+
+  ! SUM             [ shift and go to state 73 ]
+  ! SUB             [ shift and go to state 74 ]
+  ! MUL             [ shift and go to state 75 ]
+  ! DIV             [ shift and go to state 76 ]
+  ! MOD             [ shift and go to state 77 ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+  ! GT              [ shift and go to state 80 ]
+  ! LT              [ shift and go to state 81 ]
+  ! NE              [ shift and go to state 82 ]
+  ! EQ              [ shift and go to state 83 ]
+  ! LE              [ shift and go to state 84 ]
+  ! GE              [ shift and go to state 85 ]
+
+
+state 113
+
+    (52) exp -> exp DIV exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 52 (exp -> exp DIV exp .)
+    SUM             reduce using rule 52 (exp -> exp DIV exp .)
+    SUB             reduce using rule 52 (exp -> exp DIV exp .)
+    MUL             reduce using rule 52 (exp -> exp DIV exp .)
+    DIV             reduce using rule 52 (exp -> exp DIV exp .)
+    MOD             reduce using rule 52 (exp -> exp DIV exp .)
+    OR              reduce using rule 52 (exp -> exp DIV exp .)
+    AND             reduce using rule 52 (exp -> exp DIV exp .)
+    GT              reduce using rule 52 (exp -> exp DIV exp .)
+    LT              reduce using rule 52 (exp -> exp DIV exp .)
+    NE              reduce using rule 52 (exp -> exp DIV exp .)
+    EQ              reduce using rule 52 (exp -> exp DIV exp .)
+    LE              reduce using rule 52 (exp -> exp DIV exp .)
+    GE              reduce using rule 52 (exp -> exp DIV exp .)
+    SEMICOLON       reduce using rule 52 (exp -> exp DIV exp .)
+    COMMA           reduce using rule 52 (exp -> exp DIV exp .)
+    RRB             reduce using rule 52 (exp -> exp DIV exp .)
+
+  ! SUM             [ shift and go to state 73 ]
+  ! SUB             [ shift and go to state 74 ]
+  ! MUL             [ shift and go to state 75 ]
+  ! DIV             [ shift and go to state 76 ]
+  ! MOD             [ shift and go to state 77 ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+  ! GT              [ shift and go to state 80 ]
+  ! LT              [ shift and go to state 81 ]
+  ! NE              [ shift and go to state 82 ]
+  ! EQ              [ shift and go to state 83 ]
+  ! LE              [ shift and go to state 84 ]
+  ! GE              [ shift and go to state 85 ]
+
+
+state 114
+
+    (53) exp -> exp MOD exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 53 (exp -> exp MOD exp .)
+    SUM             reduce using rule 53 (exp -> exp MOD exp .)
+    SUB             reduce using rule 53 (exp -> exp MOD exp .)
+    MUL             reduce using rule 53 (exp -> exp MOD exp .)
+    DIV             reduce using rule 53 (exp -> exp MOD exp .)
+    MOD             reduce using rule 53 (exp -> exp MOD exp .)
+    OR              reduce using rule 53 (exp -> exp MOD exp .)
+    AND             reduce using rule 53 (exp -> exp MOD exp .)
+    GT              reduce using rule 53 (exp -> exp MOD exp .)
+    LT              reduce using rule 53 (exp -> exp MOD exp .)
+    NE              reduce using rule 53 (exp -> exp MOD exp .)
+    EQ              reduce using rule 53 (exp -> exp MOD exp .)
+    LE              reduce using rule 53 (exp -> exp MOD exp .)
+    GE              reduce using rule 53 (exp -> exp MOD exp .)
+    SEMICOLON       reduce using rule 53 (exp -> exp MOD exp .)
+    COMMA           reduce using rule 53 (exp -> exp MOD exp .)
+    RRB             reduce using rule 53 (exp -> exp MOD exp .)
+
+  ! SUM             [ shift and go to state 73 ]
+  ! SUB             [ shift and go to state 74 ]
+  ! MUL             [ shift and go to state 75 ]
+  ! DIV             [ shift and go to state 76 ]
+  ! MOD             [ shift and go to state 77 ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+  ! GT              [ shift and go to state 80 ]
+  ! LT              [ shift and go to state 81 ]
+  ! NE              [ shift and go to state 82 ]
+  ! EQ              [ shift and go to state 83 ]
+  ! LE              [ shift and go to state 84 ]
+  ! GE              [ shift and go to state 85 ]
+
+
+state 115
+
+    (54) exp -> exp OR exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 54 (exp -> exp OR exp .)
+    OR              reduce using rule 54 (exp -> exp OR exp .)
+    SEMICOLON       reduce using rule 54 (exp -> exp OR exp .)
+    COMMA           reduce using rule 54 (exp -> exp OR exp .)
+    RRB             reduce using rule 54 (exp -> exp OR exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+  ! SUM             [ reduce using rule 54 (exp -> exp OR exp .) ]
+  ! SUB             [ reduce using rule 54 (exp -> exp OR exp .) ]
+  ! MUL             [ reduce using rule 54 (exp -> exp OR exp .) ]
+  ! DIV             [ reduce using rule 54 (exp -> exp OR exp .) ]
+  ! MOD             [ reduce using rule 54 (exp -> exp OR exp .) ]
+  ! AND             [ reduce using rule 54 (exp -> exp OR exp .) ]
+  ! GT              [ reduce using rule 54 (exp -> exp OR exp .) ]
+  ! LT              [ reduce using rule 54 (exp -> exp OR exp .) ]
+  ! NE              [ reduce using rule 54 (exp -> exp OR exp .) ]
+  ! EQ              [ reduce using rule 54 (exp -> exp OR exp .) ]
+  ! LE              [ reduce using rule 54 (exp -> exp OR exp .) ]
+  ! GE              [ reduce using rule 54 (exp -> exp OR exp .) ]
+  ! OR              [ shift and go to state 78 ]
+
+
+state 116
+
+    (55) exp -> exp AND exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 55 (exp -> exp AND exp .)
+    OR              reduce using rule 55 (exp -> exp AND exp .)
+    AND             reduce using rule 55 (exp -> exp AND exp .)
+    SEMICOLON       reduce using rule 55 (exp -> exp AND exp .)
+    COMMA           reduce using rule 55 (exp -> exp AND exp .)
+    RRB             reduce using rule 55 (exp -> exp AND exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+  ! SUM             [ reduce using rule 55 (exp -> exp AND exp .) ]
+  ! SUB             [ reduce using rule 55 (exp -> exp AND exp .) ]
+  ! MUL             [ reduce using rule 55 (exp -> exp AND exp .) ]
+  ! DIV             [ reduce using rule 55 (exp -> exp AND exp .) ]
+  ! MOD             [ reduce using rule 55 (exp -> exp AND exp .) ]
+  ! GT              [ reduce using rule 55 (exp -> exp AND exp .) ]
+  ! LT              [ reduce using rule 55 (exp -> exp AND exp .) ]
+  ! NE              [ reduce using rule 55 (exp -> exp AND exp .) ]
+  ! EQ              [ reduce using rule 55 (exp -> exp AND exp .) ]
+  ! LE              [ reduce using rule 55 (exp -> exp AND exp .) ]
+  ! GE              [ reduce using rule 55 (exp -> exp AND exp .) ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+
+
+state 117
+
+    (67) exp -> exp GT exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 67 (exp -> exp GT exp .)
+    OR              reduce using rule 67 (exp -> exp GT exp .)
+    AND             reduce using rule 67 (exp -> exp GT exp .)
+    GT              reduce using rule 67 (exp -> exp GT exp .)
+    LT              reduce using rule 67 (exp -> exp GT exp .)
+    SEMICOLON       reduce using rule 67 (exp -> exp GT exp .)
+    COMMA           reduce using rule 67 (exp -> exp GT exp .)
+    RRB             reduce using rule 67 (exp -> exp GT exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+  ! SUM             [ reduce using rule 67 (exp -> exp GT exp .) ]
+  ! SUB             [ reduce using rule 67 (exp -> exp GT exp .) ]
+  ! MUL             [ reduce using rule 67 (exp -> exp GT exp .) ]
+  ! DIV             [ reduce using rule 67 (exp -> exp GT exp .) ]
+  ! MOD             [ reduce using rule 67 (exp -> exp GT exp .) ]
+  ! NE              [ reduce using rule 67 (exp -> exp GT exp .) ]
+  ! EQ              [ reduce using rule 67 (exp -> exp GT exp .) ]
+  ! LE              [ reduce using rule 67 (exp -> exp GT exp .) ]
+  ! GE              [ reduce using rule 67 (exp -> exp GT exp .) ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+  ! GT              [ shift and go to state 80 ]
+  ! LT              [ shift and go to state 81 ]
+
+
+state 118
+
+    (68) exp -> exp LT exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 68 (exp -> exp LT exp .)
+    OR              reduce using rule 68 (exp -> exp LT exp .)
+    AND             reduce using rule 68 (exp -> exp LT exp .)
+    LT              reduce using rule 68 (exp -> exp LT exp .)
+    SEMICOLON       reduce using rule 68 (exp -> exp LT exp .)
+    COMMA           reduce using rule 68 (exp -> exp LT exp .)
+    RRB             reduce using rule 68 (exp -> exp LT exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    GT              shift and go to state 80
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+  ! SUM             [ reduce using rule 68 (exp -> exp LT exp .) ]
+  ! SUB             [ reduce using rule 68 (exp -> exp LT exp .) ]
+  ! MUL             [ reduce using rule 68 (exp -> exp LT exp .) ]
+  ! DIV             [ reduce using rule 68 (exp -> exp LT exp .) ]
+  ! MOD             [ reduce using rule 68 (exp -> exp LT exp .) ]
+  ! GT              [ reduce using rule 68 (exp -> exp LT exp .) ]
+  ! NE              [ reduce using rule 68 (exp -> exp LT exp .) ]
+  ! EQ              [ reduce using rule 68 (exp -> exp LT exp .) ]
+  ! LE              [ reduce using rule 68 (exp -> exp LT exp .) ]
+  ! GE              [ reduce using rule 68 (exp -> exp LT exp .) ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+  ! LT              [ shift and go to state 81 ]
+
+
+state 119
+
+    (69) exp -> exp NE exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 69 (exp -> exp NE exp .)
+    OR              reduce using rule 69 (exp -> exp NE exp .)
+    AND             reduce using rule 69 (exp -> exp NE exp .)
+    GT              reduce using rule 69 (exp -> exp NE exp .)
+    LT              reduce using rule 69 (exp -> exp NE exp .)
+    NE              reduce using rule 69 (exp -> exp NE exp .)
+    GE              reduce using rule 69 (exp -> exp NE exp .)
+    SEMICOLON       reduce using rule 69 (exp -> exp NE exp .)
+    COMMA           reduce using rule 69 (exp -> exp NE exp .)
+    RRB             reduce using rule 69 (exp -> exp NE exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+
+  ! SUM             [ reduce using rule 69 (exp -> exp NE exp .) ]
+  ! SUB             [ reduce using rule 69 (exp -> exp NE exp .) ]
+  ! MUL             [ reduce using rule 69 (exp -> exp NE exp .) ]
+  ! DIV             [ reduce using rule 69 (exp -> exp NE exp .) ]
+  ! MOD             [ reduce using rule 69 (exp -> exp NE exp .) ]
+  ! EQ              [ reduce using rule 69 (exp -> exp NE exp .) ]
+  ! LE              [ reduce using rule 69 (exp -> exp NE exp .) ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+  ! GT              [ shift and go to state 80 ]
+  ! LT              [ shift and go to state 81 ]
+  ! NE              [ shift and go to state 82 ]
+  ! GE              [ shift and go to state 85 ]
+
+
+state 120
+
+    (70) exp -> exp EQ exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 70 (exp -> exp EQ exp .)
+    OR              reduce using rule 70 (exp -> exp EQ exp .)
+    AND             reduce using rule 70 (exp -> exp EQ exp .)
+    GT              reduce using rule 70 (exp -> exp EQ exp .)
+    LT              reduce using rule 70 (exp -> exp EQ exp .)
+    NE              reduce using rule 70 (exp -> exp EQ exp .)
+    EQ              reduce using rule 70 (exp -> exp EQ exp .)
+    GE              reduce using rule 70 (exp -> exp EQ exp .)
+    SEMICOLON       reduce using rule 70 (exp -> exp EQ exp .)
+    COMMA           reduce using rule 70 (exp -> exp EQ exp .)
+    RRB             reduce using rule 70 (exp -> exp EQ exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    LE              shift and go to state 84
+
+  ! SUM             [ reduce using rule 70 (exp -> exp EQ exp .) ]
+  ! SUB             [ reduce using rule 70 (exp -> exp EQ exp .) ]
+  ! MUL             [ reduce using rule 70 (exp -> exp EQ exp .) ]
+  ! DIV             [ reduce using rule 70 (exp -> exp EQ exp .) ]
+  ! MOD             [ reduce using rule 70 (exp -> exp EQ exp .) ]
+  ! LE              [ reduce using rule 70 (exp -> exp EQ exp .) ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+  ! GT              [ shift and go to state 80 ]
+  ! LT              [ shift and go to state 81 ]
+  ! NE              [ shift and go to state 82 ]
+  ! EQ              [ shift and go to state 83 ]
+  ! GE              [ shift and go to state 85 ]
+
+
+state 121
+
+    (71) exp -> exp LE exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 71 (exp -> exp LE exp .)
+    OR              reduce using rule 71 (exp -> exp LE exp .)
+    AND             reduce using rule 71 (exp -> exp LE exp .)
+    GT              reduce using rule 71 (exp -> exp LE exp .)
+    LT              reduce using rule 71 (exp -> exp LE exp .)
+    NE              reduce using rule 71 (exp -> exp LE exp .)
+    EQ              reduce using rule 71 (exp -> exp LE exp .)
+    LE              reduce using rule 71 (exp -> exp LE exp .)
+    GE              reduce using rule 71 (exp -> exp LE exp .)
+    SEMICOLON       reduce using rule 71 (exp -> exp LE exp .)
+    COMMA           reduce using rule 71 (exp -> exp LE exp .)
+    RRB             reduce using rule 71 (exp -> exp LE exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+
+  ! SUM             [ reduce using rule 71 (exp -> exp LE exp .) ]
+  ! SUB             [ reduce using rule 71 (exp -> exp LE exp .) ]
+  ! MUL             [ reduce using rule 71 (exp -> exp LE exp .) ]
+  ! DIV             [ reduce using rule 71 (exp -> exp LE exp .) ]
+  ! MOD             [ reduce using rule 71 (exp -> exp LE exp .) ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+  ! GT              [ shift and go to state 80 ]
+  ! LT              [ shift and go to state 81 ]
+  ! NE              [ shift and go to state 82 ]
+  ! EQ              [ shift and go to state 83 ]
+  ! LE              [ shift and go to state 84 ]
+  ! GE              [ shift and go to state 85 ]
+
+
+state 122
+
+    (72) exp -> exp GE exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 72 (exp -> exp GE exp .)
+    OR              reduce using rule 72 (exp -> exp GE exp .)
+    AND             reduce using rule 72 (exp -> exp GE exp .)
+    GT              reduce using rule 72 (exp -> exp GE exp .)
+    LT              reduce using rule 72 (exp -> exp GE exp .)
+    GE              reduce using rule 72 (exp -> exp GE exp .)
+    SEMICOLON       reduce using rule 72 (exp -> exp GE exp .)
+    COMMA           reduce using rule 72 (exp -> exp GE exp .)
+    RRB             reduce using rule 72 (exp -> exp GE exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+
+  ! SUM             [ reduce using rule 72 (exp -> exp GE exp .) ]
+  ! SUB             [ reduce using rule 72 (exp -> exp GE exp .) ]
+  ! MUL             [ reduce using rule 72 (exp -> exp GE exp .) ]
+  ! DIV             [ reduce using rule 72 (exp -> exp GE exp .) ]
+  ! MOD             [ reduce using rule 72 (exp -> exp GE exp .) ]
+  ! NE              [ reduce using rule 72 (exp -> exp GE exp .) ]
+  ! EQ              [ reduce using rule 72 (exp -> exp GE exp .) ]
+  ! LE              [ reduce using rule 72 (exp -> exp GE exp .) ]
+  ! OR              [ shift and go to state 78 ]
+  ! AND             [ shift and go to state 79 ]
+  ! GT              [ shift and go to state 80 ]
+  ! LT              [ shift and go to state 81 ]
+  ! GE              [ shift and go to state 85 ]
+
+
+state 123
+
+    (48) exp -> lvalue ASSIGN exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RSB             reduce using rule 48 (exp -> lvalue ASSIGN exp .)
+    SEMICOLON       reduce using rule 48 (exp -> lvalue ASSIGN exp .)
+    COMMA           reduce using rule 48 (exp -> lvalue ASSIGN exp .)
+    RRB             reduce using rule 48 (exp -> lvalue ASSIGN exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+  ! SUM             [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+  ! SUB             [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+  ! MUL             [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+  ! DIV             [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+  ! MOD             [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+  ! OR              [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+  ! AND             [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+  ! GT              [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+  ! LT              [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+  ! NE              [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+  ! EQ              [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+  ! LE              [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+  ! GE              [ reduce using rule 48 (exp -> lvalue ASSIGN exp .) ]
+
+
+state 124
+
+    (59) exp -> LRB exp RRB .
+
+    RSB             reduce using rule 59 (exp -> LRB exp RRB .)
+    SUM             reduce using rule 59 (exp -> LRB exp RRB .)
+    SUB             reduce using rule 59 (exp -> LRB exp RRB .)
+    MUL             reduce using rule 59 (exp -> LRB exp RRB .)
+    DIV             reduce using rule 59 (exp -> LRB exp RRB .)
+    MOD             reduce using rule 59 (exp -> LRB exp RRB .)
+    OR              reduce using rule 59 (exp -> LRB exp RRB .)
+    AND             reduce using rule 59 (exp -> LRB exp RRB .)
+    GT              reduce using rule 59 (exp -> LRB exp RRB .)
+    LT              reduce using rule 59 (exp -> LRB exp RRB .)
+    NE              reduce using rule 59 (exp -> LRB exp RRB .)
+    EQ              reduce using rule 59 (exp -> LRB exp RRB .)
+    LE              reduce using rule 59 (exp -> LRB exp RRB .)
+    GE              reduce using rule 59 (exp -> LRB exp RRB .)
+    SEMICOLON       reduce using rule 59 (exp -> LRB exp RRB .)
+    COMMA           reduce using rule 59 (exp -> LRB exp RRB .)
+    RRB             reduce using rule 59 (exp -> LRB exp RRB .)
+
+
+state 125
+
+    (19) funcdec -> VOID ID LRB paramdecs RRB block .
+
+    MAIN            reduce using rule 19 (funcdec -> VOID ID LRB paramdecs RRB block .)
+    VOID            reduce using rule 19 (funcdec -> VOID ID LRB paramdecs RRB block .)
+    INTEGER         reduce using rule 19 (funcdec -> VOID ID LRB paramdecs RRB block .)
+    FLOAT           reduce using rule 19 (funcdec -> VOID ID LRB paramdecs RRB block .)
+    BOOLEAN         reduce using rule 19 (funcdec -> VOID ID LRB paramdecs RRB block .)
+
+
+state 126
+
+    (28) block -> LCB varlist stmtlist RCB .
+
+    $end            reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    RCB             reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    RETURN          reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    WHILE           reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    FOR             reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    IF              reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    PRINT           reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    ID              reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    LRB             reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    SUB             reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    NOT             reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    LCB             reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    INTEGERNUMBER   reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    FLOATNUMBER     reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    TRUE            reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    FALSE           reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    MAIN            reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    VOID            reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    INTEGER         reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    FLOAT           reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    BOOLEAN         reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    ELSE            reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+    ELIF            reduce using rule 28 (block -> LCB varlist stmtlist RCB .)
+
+
+state 127
+
+    (36) stmt -> RETURN exp SEMICOLON .
+
+    RCB             reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    RETURN          reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    WHILE           reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    FOR             reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    IF              reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    PRINT           reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    ID              reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    LRB             reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    SUB             reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    NOT             reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    LCB             reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    INTEGERNUMBER   reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    FLOATNUMBER     reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    TRUE            reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    FALSE           reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    ELSE            reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+    ELIF            reduce using rule 36 (stmt -> RETURN exp SEMICOLON .)
+
+
+state 128
+
+    (39) stmt -> WHILE LRB exp . RRB stmt
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RRB             shift and go to state 136
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 129
+
+    (40) stmt -> FOR LRB exp . SEMICOLON exp SEMICOLON exp RRB stmt
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    SEMICOLON       shift and go to state 137
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 130
+
+    (41) stmt -> IF LRB exp . RRB stmt elseiflist
+    (42) stmt -> IF LRB exp . RRB stmt
+    (43) stmt -> IF LRB exp . RRB stmt elseiflist ELSE stmt
+    (44) stmt -> IF LRB exp . RRB stmt ELSE stmt
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RRB             shift and go to state 138
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 131
+
+    (45) stmt -> PRINT LRB ID . RRB SEMICOLON
+
+    RRB             shift and go to state 139
+
+
+state 132
+
+    (25) paramdec -> type ID LSB RSB .
+
+    COMMA           reduce using rule 25 (paramdec -> type ID LSB RSB .)
+    RRB             reduce using rule 25 (paramdec -> type ID LSB RSB .)
+
+
+state 133
+
+    (58) exp -> ID LRB explist RRB .
+
+    RSB             reduce using rule 58 (exp -> ID LRB explist RRB .)
+    SUM             reduce using rule 58 (exp -> ID LRB explist RRB .)
+    SUB             reduce using rule 58 (exp -> ID LRB explist RRB .)
+    MUL             reduce using rule 58 (exp -> ID LRB explist RRB .)
+    DIV             reduce using rule 58 (exp -> ID LRB explist RRB .)
+    MOD             reduce using rule 58 (exp -> ID LRB explist RRB .)
+    OR              reduce using rule 58 (exp -> ID LRB explist RRB .)
+    AND             reduce using rule 58 (exp -> ID LRB explist RRB .)
+    GT              reduce using rule 58 (exp -> ID LRB explist RRB .)
+    LT              reduce using rule 58 (exp -> ID LRB explist RRB .)
+    NE              reduce using rule 58 (exp -> ID LRB explist RRB .)
+    EQ              reduce using rule 58 (exp -> ID LRB explist RRB .)
+    LE              reduce using rule 58 (exp -> ID LRB explist RRB .)
+    GE              reduce using rule 58 (exp -> ID LRB explist RRB .)
+    SEMICOLON       reduce using rule 58 (exp -> ID LRB explist RRB .)
+    COMMA           reduce using rule 58 (exp -> ID LRB explist RRB .)
+    RRB             reduce using rule 58 (exp -> ID LRB explist RRB .)
+
+
+state 134
+
+    (74) explist -> explist COMMA . exp
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 140
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 135
+
+    (35) lvalue -> ID LSB exp RSB .
+
+    ASSIGN          reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    RSB             reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    SUM             reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    SUB             reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    MUL             reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    DIV             reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    MOD             reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    OR              reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    AND             reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    GT              reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    LT              reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    NE              reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    EQ              reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    LE              reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    GE              reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    SEMICOLON       reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    COMMA           reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+    RRB             reduce using rule 35 (lvalue -> ID LSB exp RSB .)
+
+
+state 136
+
+    (39) stmt -> WHILE LRB exp RRB . stmt
+    (36) stmt -> . RETURN exp SEMICOLON
+    (37) stmt -> . exp SEMICOLON
+    (38) stmt -> . block
+    (39) stmt -> . WHILE LRB exp RRB stmt
+    (40) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+    (41) stmt -> . IF LRB exp RRB stmt elseiflist
+    (42) stmt -> . IF LRB exp RRB stmt
+    (43) stmt -> . IF LRB exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> . IF LRB exp RRB stmt ELSE stmt
+    (45) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    RETURN          shift and go to state 59
+    WHILE           shift and go to state 62
+    FOR             shift and go to state 63
+    IF              shift and go to state 64
+    PRINT           shift and go to state 65
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    LCB             shift and go to state 30
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 60
+    stmt                           shift and go to state 141
+    block                          shift and go to state 61
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 137
+
+    (40) stmt -> FOR LRB exp SEMICOLON . exp SEMICOLON exp RRB stmt
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 142
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 138
+
+    (41) stmt -> IF LRB exp RRB . stmt elseiflist
+    (42) stmt -> IF LRB exp RRB . stmt
+    (43) stmt -> IF LRB exp RRB . stmt elseiflist ELSE stmt
+    (44) stmt -> IF LRB exp RRB . stmt ELSE stmt
+    (36) stmt -> . RETURN exp SEMICOLON
+    (37) stmt -> . exp SEMICOLON
+    (38) stmt -> . block
+    (39) stmt -> . WHILE LRB exp RRB stmt
+    (40) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+    (41) stmt -> . IF LRB exp RRB stmt elseiflist
+    (42) stmt -> . IF LRB exp RRB stmt
+    (43) stmt -> . IF LRB exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> . IF LRB exp RRB stmt ELSE stmt
+    (45) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    RETURN          shift and go to state 59
+    WHILE           shift and go to state 62
+    FOR             shift and go to state 63
+    IF              shift and go to state 64
+    PRINT           shift and go to state 65
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    LCB             shift and go to state 30
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 60
+    stmt                           shift and go to state 143
+    block                          shift and go to state 61
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 139
+
+    (45) stmt -> PRINT LRB ID RRB . SEMICOLON
+
+    SEMICOLON       shift and go to state 144
+
+
+state 140
+
+    (74) explist -> explist COMMA exp .
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RRB             reduce using rule 74 (explist -> explist COMMA exp .)
+    COMMA           reduce using rule 74 (explist -> explist COMMA exp .)
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 141
+
+    (39) stmt -> WHILE LRB exp RRB stmt .
+
+    RCB             reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    RETURN          reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    WHILE           reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    FOR             reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    IF              reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    PRINT           reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    ID              reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    LRB             reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    SUB             reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    NOT             reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    LCB             reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    INTEGERNUMBER   reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    FLOATNUMBER     reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    TRUE            reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    FALSE           reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    ELSE            reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+    ELIF            reduce using rule 39 (stmt -> WHILE LRB exp RRB stmt .)
+
+
+state 142
+
+    (40) stmt -> FOR LRB exp SEMICOLON exp . SEMICOLON exp RRB stmt
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    SEMICOLON       shift and go to state 145
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 143
+
+    (41) stmt -> IF LRB exp RRB stmt . elseiflist
+    (42) stmt -> IF LRB exp RRB stmt .
+    (43) stmt -> IF LRB exp RRB stmt . elseiflist ELSE stmt
+    (44) stmt -> IF LRB exp RRB stmt . ELSE stmt
+    (46) elseiflist -> . ELIF LRB exp RRB stmt
+    (47) elseiflist -> . elseiflist ELIF LRB exp RRB stmt
+
+    RCB             reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    RETURN          reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    WHILE           reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    FOR             reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    IF              reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    PRINT           reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    ID              reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    LRB             reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    SUB             reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    NOT             reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    LCB             reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    INTEGERNUMBER   reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    FLOATNUMBER     reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    TRUE            reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    FALSE           reduce using rule 42 (stmt -> IF LRB exp RRB stmt .)
+    ELSE            shift and go to state 147
+    ELIF            shift and go to state 148
+
+  ! ELSE            [ reduce using rule 42 (stmt -> IF LRB exp RRB stmt .) ]
+  ! ELIF            [ reduce using rule 42 (stmt -> IF LRB exp RRB stmt .) ]
+
+    elseiflist                     shift and go to state 146
+
+state 144
+
+    (45) stmt -> PRINT LRB ID RRB SEMICOLON .
+
+    RCB             reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    RETURN          reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    WHILE           reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    FOR             reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    IF              reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    PRINT           reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    ID              reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    LRB             reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    SUB             reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    NOT             reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    LCB             reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    INTEGERNUMBER   reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    FLOATNUMBER     reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    TRUE            reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    FALSE           reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    ELSE            reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    ELIF            reduce using rule 45 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+
+
+state 145
+
+    (40) stmt -> FOR LRB exp SEMICOLON exp SEMICOLON . exp RRB stmt
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 149
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 146
+
+    (41) stmt -> IF LRB exp RRB stmt elseiflist .
+    (43) stmt -> IF LRB exp RRB stmt elseiflist . ELSE stmt
+    (47) elseiflist -> elseiflist . ELIF LRB exp RRB stmt
+
+    RCB             reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    RETURN          reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    WHILE           reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    FOR             reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    IF              reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    PRINT           reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    ID              reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    LRB             reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    SUB             reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    NOT             reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    LCB             reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    INTEGERNUMBER   reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    FLOATNUMBER     reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    TRUE            reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    FALSE           reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .)
+    ELSE            shift and go to state 150
+    ELIF            shift and go to state 151
+
+  ! ELSE            [ reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .) ]
+  ! ELIF            [ reduce using rule 41 (stmt -> IF LRB exp RRB stmt elseiflist .) ]
+
+
+state 147
+
+    (44) stmt -> IF LRB exp RRB stmt ELSE . stmt
+    (36) stmt -> . RETURN exp SEMICOLON
+    (37) stmt -> . exp SEMICOLON
+    (38) stmt -> . block
+    (39) stmt -> . WHILE LRB exp RRB stmt
+    (40) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+    (41) stmt -> . IF LRB exp RRB stmt elseiflist
+    (42) stmt -> . IF LRB exp RRB stmt
+    (43) stmt -> . IF LRB exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> . IF LRB exp RRB stmt ELSE stmt
+    (45) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    RETURN          shift and go to state 59
+    WHILE           shift and go to state 62
+    FOR             shift and go to state 63
+    IF              shift and go to state 64
+    PRINT           shift and go to state 65
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    LCB             shift and go to state 30
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 60
+    stmt                           shift and go to state 152
+    block                          shift and go to state 61
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 148
+
+    (46) elseiflist -> ELIF . LRB exp RRB stmt
+
+    LRB             shift and go to state 153
+
+
+state 149
+
+    (40) stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp . RRB stmt
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RRB             shift and go to state 154
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 150
+
+    (43) stmt -> IF LRB exp RRB stmt elseiflist ELSE . stmt
+    (36) stmt -> . RETURN exp SEMICOLON
+    (37) stmt -> . exp SEMICOLON
+    (38) stmt -> . block
+    (39) stmt -> . WHILE LRB exp RRB stmt
+    (40) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+    (41) stmt -> . IF LRB exp RRB stmt elseiflist
+    (42) stmt -> . IF LRB exp RRB stmt
+    (43) stmt -> . IF LRB exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> . IF LRB exp RRB stmt ELSE stmt
+    (45) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    RETURN          shift and go to state 59
+    WHILE           shift and go to state 62
+    FOR             shift and go to state 63
+    IF              shift and go to state 64
+    PRINT           shift and go to state 65
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    LCB             shift and go to state 30
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 60
+    stmt                           shift and go to state 155
+    block                          shift and go to state 61
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 151
+
+    (47) elseiflist -> elseiflist ELIF . LRB exp RRB stmt
+
+    LRB             shift and go to state 156
+
+
+state 152
+
+    (44) stmt -> IF LRB exp RRB stmt ELSE stmt .
+
+    RCB             reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    RETURN          reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    WHILE           reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    FOR             reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    IF              reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    PRINT           reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    ID              reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    LRB             reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    SUB             reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    NOT             reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    LCB             reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    INTEGERNUMBER   reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    FLOATNUMBER     reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    TRUE            reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    FALSE           reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    ELSE            reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+    ELIF            reduce using rule 44 (stmt -> IF LRB exp RRB stmt ELSE stmt .)
+
+
+state 153
+
+    (46) elseiflist -> ELIF LRB . exp RRB stmt
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 157
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 154
+
+    (40) stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB . stmt
+    (36) stmt -> . RETURN exp SEMICOLON
+    (37) stmt -> . exp SEMICOLON
+    (38) stmt -> . block
+    (39) stmt -> . WHILE LRB exp RRB stmt
+    (40) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+    (41) stmt -> . IF LRB exp RRB stmt elseiflist
+    (42) stmt -> . IF LRB exp RRB stmt
+    (43) stmt -> . IF LRB exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> . IF LRB exp RRB stmt ELSE stmt
+    (45) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    RETURN          shift and go to state 59
+    WHILE           shift and go to state 62
+    FOR             shift and go to state 63
+    IF              shift and go to state 64
+    PRINT           shift and go to state 65
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    LCB             shift and go to state 30
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 60
+    stmt                           shift and go to state 158
+    block                          shift and go to state 61
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 155
+
+    (43) stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .
+
+    RCB             reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    RETURN          reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    WHILE           reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    FOR             reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    IF              reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    PRINT           reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    ID              reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    LRB             reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    SUB             reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    NOT             reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    LCB             reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    INTEGERNUMBER   reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    FLOATNUMBER     reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    TRUE            reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    FALSE           reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    ELSE            reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+    ELIF            reduce using rule 43 (stmt -> IF LRB exp RRB stmt elseiflist ELSE stmt .)
+
+
+state 156
+
+    (47) elseiflist -> elseiflist ELIF LRB . exp RRB stmt
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 159
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 157
+
+    (46) elseiflist -> ELIF LRB exp . RRB stmt
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RRB             shift and go to state 160
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 158
+
+    (40) stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .
+
+    RCB             reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    RETURN          reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    WHILE           reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    FOR             reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    IF              reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    PRINT           reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    ID              reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    LRB             reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    SUB             reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    NOT             reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    LCB             reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    INTEGERNUMBER   reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    FLOATNUMBER     reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    TRUE            reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    FALSE           reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    ELSE            reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+    ELIF            reduce using rule 40 (stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt .)
+
+
+state 159
+
+    (47) elseiflist -> elseiflist ELIF LRB exp . RRB stmt
+    (49) exp -> exp . SUM exp
+    (50) exp -> exp . SUB exp
+    (51) exp -> exp . MUL exp
+    (52) exp -> exp . DIV exp
+    (53) exp -> exp . MOD exp
+    (54) exp -> exp . OR exp
+    (55) exp -> exp . AND exp
+    (67) exp -> exp . GT exp
+    (68) exp -> exp . LT exp
+    (69) exp -> exp . NE exp
+    (70) exp -> exp . EQ exp
+    (71) exp -> exp . LE exp
+    (72) exp -> exp . GE exp
+
+    RRB             shift and go to state 161
+    SUM             shift and go to state 73
+    SUB             shift and go to state 74
+    MUL             shift and go to state 75
+    DIV             shift and go to state 76
+    MOD             shift and go to state 77
+    OR              shift and go to state 78
+    AND             shift and go to state 79
+    GT              shift and go to state 80
+    LT              shift and go to state 81
+    NE              shift and go to state 82
+    EQ              shift and go to state 83
+    LE              shift and go to state 84
+    GE              shift and go to state 85
+
+
+state 160
+
+    (46) elseiflist -> ELIF LRB exp RRB . stmt
+    (36) stmt -> . RETURN exp SEMICOLON
+    (37) stmt -> . exp SEMICOLON
+    (38) stmt -> . block
+    (39) stmt -> . WHILE LRB exp RRB stmt
+    (40) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+    (41) stmt -> . IF LRB exp RRB stmt elseiflist
+    (42) stmt -> . IF LRB exp RRB stmt
+    (43) stmt -> . IF LRB exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> . IF LRB exp RRB stmt ELSE stmt
+    (45) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    RETURN          shift and go to state 59
+    WHILE           shift and go to state 62
+    FOR             shift and go to state 63
+    IF              shift and go to state 64
+    PRINT           shift and go to state 65
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    LCB             shift and go to state 30
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 60
+    stmt                           shift and go to state 162
+    block                          shift and go to state 61
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 161
+
+    (47) elseiflist -> elseiflist ELIF LRB exp RRB . stmt
+    (36) stmt -> . RETURN exp SEMICOLON
+    (37) stmt -> . exp SEMICOLON
+    (38) stmt -> . block
+    (39) stmt -> . WHILE LRB exp RRB stmt
+    (40) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+    (41) stmt -> . IF LRB exp RRB stmt elseiflist
+    (42) stmt -> . IF LRB exp RRB stmt
+    (43) stmt -> . IF LRB exp RRB stmt elseiflist ELSE stmt
+    (44) stmt -> . IF LRB exp RRB stmt ELSE stmt
+    (45) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (48) exp -> . lvalue ASSIGN exp
+    (49) exp -> . exp SUM exp
+    (50) exp -> . exp SUB exp
+    (51) exp -> . exp MUL exp
+    (52) exp -> . exp DIV exp
+    (53) exp -> . exp MOD exp
+    (54) exp -> . exp OR exp
+    (55) exp -> . exp AND exp
+    (56) exp -> . const
+    (57) exp -> . lvalue
+    (58) exp -> . ID LRB explist RRB
+    (59) exp -> . LRB exp RRB
+    (60) exp -> . ID LRB RRB
+    (61) exp -> . SUB exp
+    (62) exp -> . NOT exp
+    (67) exp -> . exp GT exp
+    (68) exp -> . exp LT exp
+    (69) exp -> . exp NE exp
+    (70) exp -> . exp EQ exp
+    (71) exp -> . exp LE exp
+    (72) exp -> . exp GE exp
+    (28) block -> . LCB varlist stmtlist RCB
+    (29) block -> . LCB varlist RCB
+    (30) block -> . LCB stmtlist RCB
+    (31) block -> . LCB RCB
+    (34) lvalue -> . ID
+    (35) lvalue -> . ID LSB exp RSB
+    (63) const -> . INTEGERNUMBER
+    (64) const -> . FLOATNUMBER
+    (65) const -> . TRUE
+    (66) const -> . FALSE
+
+    RETURN          shift and go to state 59
+    WHILE           shift and go to state 62
+    FOR             shift and go to state 63
+    IF              shift and go to state 64
+    PRINT           shift and go to state 65
+    ID              shift and go to state 38
+    LRB             shift and go to state 43
+    SUB             shift and go to state 41
+    NOT             shift and go to state 44
+    LCB             shift and go to state 30
+    INTEGERNUMBER   shift and go to state 45
+    FLOATNUMBER     shift and go to state 46
+    TRUE            shift and go to state 47
+    FALSE           shift and go to state 48
+
+    exp                            shift and go to state 60
+    stmt                           shift and go to state 163
+    block                          shift and go to state 61
+    lvalue                         shift and go to state 40
+    const                          shift and go to state 42
+
+state 162
+
+    (46) elseiflist -> ELIF LRB exp RRB stmt .
+
+    RCB             reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    RETURN          reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    WHILE           reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    FOR             reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    IF              reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    PRINT           reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    ID              reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    LRB             reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    SUB             reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    NOT             reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    LCB             reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    INTEGERNUMBER   reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    FLOATNUMBER     reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    TRUE            reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    FALSE           reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    ELSE            reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+    ELIF            reduce using rule 46 (elseiflist -> ELIF LRB exp RRB stmt .)
+
+
+state 163
+
+    (47) elseiflist -> elseiflist ELIF LRB exp RRB stmt .
+
+    RCB             reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    RETURN          reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    WHILE           reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    FOR             reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    IF              reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    PRINT           reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    ID              reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    LRB             reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    SUB             reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    NOT             reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    LCB             reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    INTEGERNUMBER   reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    FLOATNUMBER     reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    TRUE            reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    FALSE           reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    ELSE            reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+    ELIF            reduce using rule 47 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
+
